@@ -1,0 +1,35 @@
+{
+  "kind": "osdu:wks:Manifest:1.0.0",
+  "data": {
+    "WorkProduct": {
+      "kind": "osdu:wks:master-data--Facility:1.0.0",
+      "id": "master-data--Facility:PPR1-Well-021",
+      "legal": {
+        "legaltags": [
+          "synthetic-data-example"
+        ],
+        "otherRelevantDataCountries": [
+          "US"
+        ]
+      },
+      "data": {
+        "FacilityName": "PPR1-Well-021",
+        "FacilityTypeID": "Well",
+        "Source": "Synthetic Data Generator",
+        "CreationDateTime": "2026-04-06T13:35:33.928084+00:00",
+        "ProductionDateRange": {
+          "Start": "2022-01-01T00:00:00",
+          "End": "2023-12-31T00:00:00"
+        },
+        "SampleCount": 730,
+        "Measurements": [
+          "oil_rate_bbl_d",
+          "gas_rate_mscf_d",
+          "water_rate_bbl_d",
+          "wellhead_pressure_psi",
+          "temperature_f"
+        ]
+      }
+    }
+  }
+}

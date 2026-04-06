@@ -1,0 +1,27 @@
+{
+  "kind": "osdu:wks:Manifest:1.0.0",
+  "data": {
+    "WorkProduct": {
+      "kind": "osdu:wks:work-product--SeismicTraceData:1.0.0",
+      "id": "work-product--SeismicTraceData:ppr-1-3d-survey",
+      "legal": {
+        "legaltags": [
+          "synthetic-data-example"
+        ],
+        "otherRelevantDataCountries": [
+          "US"
+        ]
+      },
+      "data": {
+        "Name": "ppr-1_3d_survey",
+        "Description": "Synthetic 3D seismic survey: ppr-1_3d_survey",
+        "Source": "Synthetic Data Generator",
+        "CreationDateTime": "2026-04-06T13:35:33.899442+00:00",
+        "TraceCount": 2500,
+        "SampleCount": 251,
+        "SampleIntervalMs": 4.0,
+        "TotalTimeMs": 1000.0
+      }
+    }
+  }
+}
