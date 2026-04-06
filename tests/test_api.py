@@ -62,6 +62,10 @@ def test_config_defaults():
 
 
 def test_config_api_key_default_is_none():
+    import os
     import examples.api.config as cfg
-    # Without setting API_KEY env var, it should be None
+    # API_KEY should be Optional[str] — None when unset, a string when set
     assert cfg.API_KEY is None or isinstance(cfg.API_KEY, str)
+    # More specific: if not explicitly set in test environment, should be None
+    if "API_KEY" not in os.environ:
+        assert cfg.API_KEY is None
