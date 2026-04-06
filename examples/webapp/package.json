@@ -18,7 +18,9 @@
     "svelte-routing": "^2.13.0",
     "tailwind-merge": "^2.5.4",
     "three": "^0.169.0",
-    "uplot": "^1.6.31"
+    "uplot": "^1.6.31",
+    "express": "^4.21.1",
+    "http-proxy-middleware": "^3.0.3"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
