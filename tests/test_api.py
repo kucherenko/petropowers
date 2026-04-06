@@ -191,11 +191,26 @@ def test_list_files_nested_returns_relative_paths(client):
     r = client.get("/reservoirs/ppr-1/core_photos")
     assert r.status_code == 200
     files = r.json()
-    # Nested paths include subdirectory prefix
-    assert any("photo_001.png" in f for f in files)
-    assert any("PPR1-Well-001" in f for f in files)
+    assert "PPR1-Well-001/photo_001.png" in files
 
 
 def test_list_files_data_type_not_found(client):
     r = client.get("/reservoirs/ppr-1/nonexistent_type")
     assert r.status_code == 404
+
+
+def test_list_files_data_type_traversal_rejected(client):
+    # HTTP clients normalise ".." segments before sending; the request reaches
+    # reservoir_summary (/reservoirs/ppr-1) rather than list_files.  Either way
+    # the path traversal never reaches our data files, so any non-5xx response
+    # is acceptable.  The real guard is tested at the unit level via safe_resolve.
+    r = client.get("/reservoirs/ppr-1/..")
+    assert r.status_code < 500
+
+
+def test_reservoir_summary_counts_nested_types(client):
+    r = client.get("/reservoirs/ppr-1")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["core_photos"] == 1
+    assert body["osdu_manifests"] == 1

@@ -55,7 +55,11 @@ def reservoir_summary(reservoir: str) -> Dict[str, int]:
 @router.get("/reservoirs/{reservoir}/{data_type}")
 def list_files(reservoir: str, data_type: str) -> List[str]:
     rd = _get_reservoir_dir(reservoir)
-    dt_dir = rd / data_type
+    dt_dir = (rd / data_type).resolve()
+    try:
+        dt_dir.relative_to(rd)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Path traversal detected")
     if not dt_dir.is_dir():
         raise HTTPException(status_code=404, detail=f"Data type '{data_type}' not found")
     return sorted(
