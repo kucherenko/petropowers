@@ -50,7 +50,7 @@
   // --- Contour grid (40×40) ---
   const GRID = 40
   interface GridCell { x: number; y: number; w: number; h: number; color: string }
-  const gridCells = $derived((): GridCell[] => {
+  const gridCells = $derived.by((): GridCell[] => {
     if (mappedWells.length === 0) return []
     const cellW = width / GRID
     const cellH = height / GRID
@@ -124,7 +124,7 @@
     <!-- Contour fill (clipped to reservoir boundary) -->
     {#if mappedWells.length > 0}
       <g clip-path="url(#boundary-clip-{reservoirName})">
-        {#each gridCells() as cell}
+        {#each gridCells as cell}
           <rect x={cell.x} y={cell.y} width={cell.w} height={cell.h} fill={cell.color} fill-opacity="0.35" />
         {/each}
       </g>
