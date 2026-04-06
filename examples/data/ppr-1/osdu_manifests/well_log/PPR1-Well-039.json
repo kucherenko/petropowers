@@ -1,0 +1,132 @@
+{
+  "kind": "osdu:wks:Manifest:1.0.0",
+  "data": {
+    "WorkProduct": {
+      "kind": "osdu:wks:work-product--WellLog:1.0.0",
+      "id": "work-product--WellLog:PPR1-Well-039",
+      "legal": {
+        "legaltags": [
+          "synthetic-data-example"
+        ],
+        "otherRelevantDataCountries": [
+          "US"
+        ]
+      },
+      "data": {
+        "Name": "Well Log - PPR1-Well-039",
+        "Description": "Synthetic well log for PPR1-Well-039",
+        "WellboreID": "master-data--Wellbore:PPR1-Well-039-01",
+        "Source": "Synthetic Data Generator",
+        "CreationDateTime": "2026-04-06T13:54:18.795558+00:00",
+        "LogCurveDepth": {
+          "Start": 1500.0,
+          "End": 3500.0,
+          "Unit": "M"
+        },
+        "LogCurveData": {
+          "Curves": [
+            {
+              "CurveID": "log-curve-GR",
+              "CurveUnit": "API",
+              "LogCurveValues": [
+                145.11085,
+                137.83227,
+                81.86467,
+                123.20418,
+                150.14685,
+                89.97932,
+                147.2377,
+                82.09393,
+                131.48962,
+                177.05077
+              ]
+            },
+            {
+              "CurveID": "log-curve-RHOB",
+              "CurveUnit": "g/cc",
+              "LogCurveValues": [
+                2.42503,
+                2.6175,
+                2.62602,
+                2.35982,
+                2.53685,
+                2.78069,
+                2.67631,
+                2.58479,
+                2.69166,
+                2.32954
+              ]
+            },
+            {
+              "CurveID": "log-curve-NPHI",
+              "CurveUnit": "vol/vol",
+              "LogCurveValues": [
+                0.33116,
+                0.27717,
+                0.23383,
+                0.35363,
+                0.41402,
+                0.29755,
+                0.15411,
+                0.3218,
+                0.28444,
+                0.3382
+              ]
+            },
+            {
+              "CurveID": "log-curve-RT",
+              "CurveUnit": "ohm-m",
+              "LogCurveValues": [
+                1.89837,
+                3.72072,
+                2.23932,
+                5.78551,
+                5.08198,
+                2.40181,
+                10.88967,
+                0.69994,
+                0.5,
+                0.5
+              ]
+            },
+            {
+              "CurveID": "log-curve-DT",
+              "CurveUnit": "us/ft",
+              "LogCurveValues": [
+                168.6669,
+                135.75687,
+                150.16868,
+                150.70007,
+                160.24918,
+                140.15363,
+                164.22417,
+                158.82996,
+                100.0,
+                123.92711
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "MasterData": {
+      "Well": {
+        "kind": "osdu:wks:master-data--Well:1.0.0",
+        "id": "master-data--Well:PPR1-Well-039",
+        "data": {
+          "FacilityName": "PPR1-Well-039",
+          "FieldName": "PPR-1 Field",
+          "Operator": "PetroPowers Synthetic"
+        }
+      },
+      "Wellbore": {
+        "kind": "osdu:wks:master-data--Wellbore:1.0.0",
+        "id": "master-data--Wellbore:PPR1-Well-039-01",
+        "data": {
+          "Name": "PPR1-Well-039-01",
+          "WellID": "master-data--Well:PPR1-Well-039"
+        }
+      }
+    }
+  }
+}

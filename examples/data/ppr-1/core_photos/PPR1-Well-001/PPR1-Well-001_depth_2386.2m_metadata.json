@@ -1,0 +1,20 @@
+{
+  "depth_start": 2386.2040682294255,
+  "depth_end": 2387.2040682294255,
+  "latitude": 35.97196099380131,
+  "longitude": -84.24206240265853,
+  "well_name": "PPR1-Well-001",
+  "lithology": "sandstone",
+  "porosity": 0.28947360581187276,
+  "permeability": 103.23557440877303,
+  "grain_size": "medium",
+  "texture": "poorly sorted",
+  "color": "white",
+  "fractures": 2,
+  "bedding_angle": 70.74578747492585,
+  "oil_staining": true,
+  "sample_date": "2024-01-01",
+  "field_name": "PPR-1 Field",
+  "formation": "PPR-1 Formation",
+  "image_path": "/Users/Andrii_Kucherenko/Workspace/projects/lab/petropowers/examples/data/ppr-1/core_photos/PPR1-Well-001/PPR1-Well-001_depth_2386.2m.png"
+}
