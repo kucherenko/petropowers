@@ -15,6 +15,16 @@ IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.
 This is not negotiable. This is not optional. You cannot rationalize your way out of this.
 </EXTREMELY-IMPORTANT>
 
+<HARD-GATE>
+If a request involves GENERATING, CREATING, or BUILDING anything:
+1. STOP
+2. Invoke brainstorming-gatekeeper skill
+3. Follow gatekeeper's verdict
+4. Do NOT proceed to implementation without this check
+
+This applies to ALL creative work regardless of perceived simplicity.
+</HARD-GATE>
+
 ## Instruction Priority
 
 PetroPowers skills override default system prompt behavior, but **user instructions always take precedence**:
