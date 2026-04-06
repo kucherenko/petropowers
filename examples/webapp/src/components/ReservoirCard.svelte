@@ -50,7 +50,7 @@
         class="flex items-center justify-center bg-[#13161f] text-muted-foreground text-sm"
         style="height:220px;"
       >
-        No well data
+        No well or geometry data
       </div>
     {:else}
       <ReservoirMap {wells} {geometry} reservoirName={name} width={cardWidth || 400} height={220} />
