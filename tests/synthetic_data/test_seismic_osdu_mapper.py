@@ -83,4 +83,4 @@ def test_segy_mapper_survey_name_in_id():
             legal_tags={"legaltags": ["tag"]},
         )
         entity_id = manifest["data"]["WorkProduct"]["id"]
-        assert "ppr-1" in entity_id or "ppr" in entity_id
+        assert "ppr-1" in entity_id

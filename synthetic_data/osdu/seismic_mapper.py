@@ -22,13 +22,24 @@ class SEGYMapper(OSDUMapper):
         """
         survey_name = os.path.splitext(os.path.basename(segy_path))[0]
 
-        with segyio.open(segy_path, ignore_geometry=True) as f:
-            n_traces = f.tracecount
-            n_samples = len(f.samples)
-            sample_interval_us = int(f.bin[segyio.BinField.Interval])
+        try:
+            with segyio.open(segy_path, ignore_geometry=True) as f:
+                n_traces = f.tracecount
+                n_samples = len(f.samples)
+                sample_interval_us = int(f.bin[segyio.BinField.Interval])
+        except Exception as exc:
+            raise OSError(f"Failed to read SEG-Y file '{segy_path}': {exc}") from exc
+
+        if sample_interval_us == 0:
+            import warnings
+            warnings.warn(
+                f"SEG-Y BinField.Interval is 0 in {segy_path}; sample interval unknown",
+                UserWarning,
+                stacklevel=2,
+            )
 
         sample_interval_ms = sample_interval_us / 1000.0
-        total_time_ms = n_samples * sample_interval_ms
+        total_time_ms = (n_samples - 1) * sample_interval_ms
 
         manifest = {
             "kind": "osdu:wks:Manifest:1.0.0",
