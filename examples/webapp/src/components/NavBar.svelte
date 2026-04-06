@@ -1,6 +1,6 @@
 <script lang="ts">
   import { navigate } from 'svelte-routing'
-  import { apiKey } from '../lib/stores'
+  import { apiKey, theme } from '../lib/stores'
   import Button from './ui/Button.svelte'
 
   interface Props {
@@ -14,7 +14,7 @@
   }
 </script>
 
-<header class="sticky top-0 z-10 flex items-center justify-between border-b bg-background px-6 h-14 shadow-sm">
+<header class="sticky top-0 z-10 flex items-center justify-between border-b bg-card px-6 h-14 shadow-sm">
   <div class="flex items-center gap-2 text-sm font-medium">
     <span class="font-semibold text-primary">Reservoir Manager</span>
     {#each breadcrumb as crumb, i}
@@ -22,5 +22,18 @@
       <span class={i === breadcrumb.length - 1 ? 'text-foreground' : 'text-muted-foreground'}>{crumb}</span>
     {/each}
   </div>
-  <Button variant="ghost" size="sm" onclick={disconnect}>Disconnect</Button>
+  <div class="flex items-center gap-3">
+    <!-- Theme toggle pill -->
+    <button
+      role="switch"
+      aria-checked={$theme === 'dark'}
+      aria-label="Toggle light/dark mode"
+      onclick={() => theme.toggle()}
+      class="flex items-center gap-1.5 rounded-full border border-border bg-muted px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    >
+      <span aria-hidden="true">{$theme === 'dark' ? '☽' : '☀'}</span>
+      <span>{$theme === 'dark' ? 'Dark' : 'Light'}</span>
+    </button>
+    <Button variant="ghost" size="sm" onclick={disconnect}>Disconnect</Button>
+  </div>
 </header>
