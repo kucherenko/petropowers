@@ -54,6 +54,9 @@ class TimeSeriesGenerator(Generator):
         t0 = date.fromisoformat(start_date)
         dates = [t0 + timedelta(days=i) for i in range(n_days)]
 
+        if peak_oil_rate is not None and peak_oil_rate < 0:
+            raise ValueError(f"peak_oil_rate must be non-negative, got {peak_oil_rate}")
+
         # Exponential decline with noise — typical production profile
         if peak_oil_rate is None:
             peak_oil_rate = float(self.rng.uniform(200, 1500))
@@ -136,6 +139,7 @@ class TimeSeriesGenerator(Generator):
                 n_days=n_days,
                 start_date=start_date,
                 output_dir=output_dir,
+                **kwargs,
             )
             for i in range(n_records)
         ]
