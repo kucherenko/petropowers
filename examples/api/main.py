@@ -30,6 +30,8 @@ When `API_KEY` is unset the service is open to all callers.
 """,
 )
 
+# geometry_router must precede catalogue_router: /reservoirs/{reservoir}/geometry
+# would otherwise be shadowed by the /{reservoir}/{data_type} catch-all route.
 app.include_router(geometry_router)
 app.include_router(catalogue_router)
 app.include_router(download_router)

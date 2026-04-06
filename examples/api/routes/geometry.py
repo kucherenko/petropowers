@@ -1,5 +1,4 @@
 """Geometry route: surface well coordinates and reservoir boundary polygon."""
-from pathlib import Path
 import json
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -7,6 +6,7 @@ from pydantic import BaseModel
 
 from .. import config
 from ..auth import verify_api_key
+from ..utils import safe_resolve
 
 router = APIRouter(dependencies=[Depends(verify_api_key)])
 
@@ -27,19 +27,6 @@ class GeometryResponse(BaseModel):
     boundary: list[BoundaryPoint]
 
 
-def _get_reservoir_dir(reservoir: str) -> Path:
-    """Return reservoir directory or raise 400/404."""
-    data_dir = config.DATA_DIR
-    rd = (data_dir / reservoir).resolve()
-    try:
-        rd.relative_to(data_dir.resolve())
-    except ValueError:
-        raise HTTPException(status_code=400, detail="Path traversal detected")
-    if not rd.is_dir():
-        raise HTTPException(status_code=404, detail=f"Reservoir '{reservoir}' not found")
-    return rd
-
-
 @router.get(
     "/reservoirs/{reservoir}/geometry",
     response_model=GeometryResponse,
@@ -51,7 +38,10 @@ def _get_reservoir_dir(reservoir: str) -> Path:
     ),
 )
 def get_geometry(reservoir: str) -> GeometryResponse:
-    rd = _get_reservoir_dir(reservoir)
+    data_dir = config.DATA_DIR
+    rd = safe_resolve(data_dir, reservoir)
+    if not rd.is_dir():
+        raise HTTPException(status_code=404, detail=f"Reservoir '{reservoir}' not found")
     geo_dir = rd / "geometry"
 
     wells_path = geo_dir / "wells.json"
