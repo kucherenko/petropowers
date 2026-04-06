@@ -133,3 +133,69 @@ def test_safe_resolve_traversal_raises_400(tmp_path):
     with pytest.raises(HTTPException) as exc_info:
         safe_resolve(tmp_path, "../../etc/passwd")
     assert exc_info.value.status_code == 400
+
+
+# ---------------------------------------------------------------------------
+# Health endpoint
+# ---------------------------------------------------------------------------
+
+def test_health_returns_ok(client):
+    r = client.get("/health")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["status"] == "ok"
+    assert "ppr-1" in body["reservoirs"]
+
+
+# ---------------------------------------------------------------------------
+# /reservoirs
+# ---------------------------------------------------------------------------
+
+def test_list_reservoirs(client):
+    r = client.get("/reservoirs")
+    assert r.status_code == 200
+    assert "ppr-1" in r.json()
+
+
+# ---------------------------------------------------------------------------
+# /reservoirs/{reservoir}
+# ---------------------------------------------------------------------------
+
+def test_reservoir_summary(client):
+    r = client.get("/reservoirs/ppr-1")
+    assert r.status_code == 200
+    body = r.json()
+    assert "well_logs" in body
+    assert body["well_logs"] == 2
+    assert body["production"] == 1
+
+
+def test_reservoir_not_found(client):
+    r = client.get("/reservoirs/nonexistent")
+    assert r.status_code == 404
+
+
+# ---------------------------------------------------------------------------
+# /reservoirs/{reservoir}/{data_type}
+# ---------------------------------------------------------------------------
+
+def test_list_files_flat(client):
+    r = client.get("/reservoirs/ppr-1/well_logs")
+    assert r.status_code == 200
+    files = r.json()
+    assert "PPR1-Well-001.las" in files
+    assert "PPR1-Well-002.las" in files
+
+
+def test_list_files_nested_returns_relative_paths(client):
+    r = client.get("/reservoirs/ppr-1/core_photos")
+    assert r.status_code == 200
+    files = r.json()
+    # Nested paths include subdirectory prefix
+    assert any("photo_001.png" in f for f in files)
+    assert any("PPR1-Well-001" in f for f in files)
+
+
+def test_list_files_data_type_not_found(client):
+    r = client.get("/reservoirs/ppr-1/nonexistent_type")
+    assert r.status_code == 404
