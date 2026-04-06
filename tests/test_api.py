@@ -106,6 +106,12 @@ def test_content_type_for_unknown(tmp_path):
     assert content_type_for(tmp_path / "file.bin") == "application/octet-stream"
 
 
+def test_content_type_for_jpg(tmp_path):
+    from examples.api.utils import content_type_for
+    assert content_type_for(tmp_path / "photo.jpg") == "image/jpeg"
+    assert content_type_for(tmp_path / "photo.jpeg") == "image/jpeg"
+
+
 def test_safe_resolve_valid_path(tmp_path):
     from examples.api.utils import safe_resolve
     (tmp_path / "file.txt").write_text("x")
