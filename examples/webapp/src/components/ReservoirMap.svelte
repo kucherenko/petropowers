@@ -36,6 +36,17 @@
   const minP = $derived(allPressures.length ? Math.min(...allPressures) : 0)
   const maxP = $derived(allPressures.length ? Math.max(...allPressures) : 1)
 
+  // Precompute quartile thresholds once per render — avoids O(n log n) sort inside the 1600-cell loop
+  const sortedPressures = $derived([...allPressures].sort((a, b) => a - b))
+  const q1 = $derived(sortedPressures[Math.floor(sortedPressures.length * 0.25)] ?? 0)
+  const q3 = $derived(sortedPressures[Math.floor(sortedPressures.length * 0.75)] ?? 1)
+
+  function cellColor(p: number): string {
+    if (p <= q1) return '#22c55e'
+    if (p >= q3) return '#ef4444'
+    return '#f59e0b'
+  }
+
   // --- Contour grid (40×40) ---
   const GRID = 40
   interface GridCell { x: number; y: number; w: number; h: number; color: string }
@@ -57,7 +68,7 @@
           y: row * cellH,
           w: cellW,
           h: cellH,
-          color: pressureQuartileColor(p, allPressures),
+          color: cellColor(p),
         })
       }
     }
