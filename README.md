@@ -180,6 +180,61 @@ Workflows for software engineering best practices:
 - **writing-skills** - Create new skills following best practices (includes testing methodology)
 - **using-petropowers** - Introduction to the skills system
 
+### Synthetic Data Generation
+
+Generate realistic test data for oil & gas workflows:
+
+- **Well Logs (LAS)** - GR, RHOB, NPHI, RT, DT curves with Archie equation constraints
+- **Seismic (SEG-Y)** - Volumes with proper geometry and trace headers
+- **Core Photos** - AI-generated core sample images (requires API key - see setup below)
+- **OSDU Manifests** - Compliant metadata for platform integration
+
+```python
+from synthetic_data.well_log import LASGenerator
+from synthetic_data.seismic import SEGYGenerator
+from synthetic_data.core_photos import CorePhotoGenerator
+
+# Generate well logs
+las_gen = LASGenerator(seed=42)
+las_path = las_gen.create_record(well_name="Test-001", lithology="sandstone")
+
+# Generate seismic
+segy_gen = SEGYGenerator(seed=42)
+segy_path = segy_gen.create_record(survey_name="Test-Survey", n_inlines=100)
+
+# Generate core photos (requires GOOGLE_AI_API_KEY)
+photo_gen = CorePhotoGenerator()
+result = photo_gen.create_record(well_name="Test-001", lithology="sandstone")
+```
+
+**Skill:** `synthetic-data-generation`
+**File:** `skills/synthetic-data-generation/SKILL.md`
+
+#### Core Photo Generation Setup
+
+Core photos use Google's Gemini API for AI image generation. This is an **expensive operation** - the agent will always ask for confirmation before generating.
+
+**Setup:**
+
+1. Get a Google AI API key from [Google AI Studio](https://aistudio.google.com/apikey)
+
+2. Set the environment variable:
+   ```bash
+   export GOOGLE_AI_API_KEY="your-api-key-here"
+   ```
+
+3. Install the required package:
+   ```bash
+   pip install google-generativeai
+   ```
+
+**Cost Protection:** When you request core photos, the agent will always ask:
+- How many photos? (never generates without explicit count)
+- What lithology? (sandstone, shale, carbonate, limestone, dolomite)
+- Any specific features? (fractures, oil staining, bedding angles)
+
+**Example assets:** See `synthetic_data/assets/` for reference core photographs showing proper format with depth markers, well identification, and scale bars.
+
 ### Oil & Gas Domain Pipelines
 
 Specialized skills for petroleum engineering workflows, from exploration to refining. These skills help AI agents understand industry terminology, apply domain expertise, and follow best practices for oil & gas operations.
