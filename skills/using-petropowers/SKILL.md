@@ -85,6 +85,18 @@ digraph skill_flow {
 }
 ```
 
+## Brainstorming Triggers
+
+Before ANY action, check if the request matches these patterns:
+
+| Pattern Type | Examples | Action |
+|--------------|----------|--------|
+| Creative keywords | generate, create, build, implement, add, develop | Invoke gatekeeper |
+| Oil & gas terms | reservoir, well, seismic, LAS, SEG-Y, drilling, production | Invoke gatekeeper |
+| Missing details | no size, no format, no location, no constraints | Invoke gatekeeper |
+
+If ANY pattern matches → invoke `brainstorming-gatekeeper` skill FIRST.
+
 ## Red Flags
 
 These thoughts mean STOP—you're rationalizing:
