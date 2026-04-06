@@ -214,3 +214,49 @@ def test_reservoir_summary_counts_nested_types(client):
     body = r.json()
     assert body["core_photos"] == 1
     assert body["osdu_manifests"] == 1
+
+
+# ---------------------------------------------------------------------------
+# Download
+# ---------------------------------------------------------------------------
+
+def test_download_flat_file(client):
+    r = client.get("/reservoirs/ppr-1/well_logs/PPR1-Well-001.las")
+    assert r.status_code == 200
+    assert r.headers["content-type"].startswith("text/plain")
+
+
+def test_download_csv_file(client):
+    r = client.get("/reservoirs/ppr-1/production/PPR1-Well-001.csv")
+    assert r.status_code == 200
+    assert r.headers["content-type"].startswith("text/csv")
+
+
+def test_download_nested_png(client):
+    r = client.get("/reservoirs/ppr-1/core_photos/PPR1-Well-001/photo_001.png")
+    assert r.status_code == 200
+    assert r.headers["content-type"].startswith("image/png")
+
+
+def test_download_nested_json(client):
+    r = client.get("/reservoirs/ppr-1/osdu_manifests/well_log/PPR1-Well-001.json")
+    assert r.status_code == 200
+    assert r.headers["content-type"].startswith("application/json")
+
+
+def test_download_file_not_found(client):
+    r = client.get("/reservoirs/ppr-1/well_logs/missing.las")
+    assert r.status_code == 404
+
+
+def test_download_reservoir_not_found(client):
+    r = client.get("/reservoirs/ghost/well_logs/file.las")
+    assert r.status_code == 404
+
+
+def test_download_path_traversal_rejected(client):
+    # Starlette normalises `../../` in the URL before routing, so the traversal
+    # may be absorbed at the HTTP layer (404) before reaching safe_resolve (400).
+    # Either status means the file was not served — both are acceptable.
+    r = client.get("/reservoirs/ppr-1/well_logs/../../etc/passwd")
+    assert r.status_code in (400, 404)
