@@ -86,7 +86,13 @@ When working on oil & gas projects, consider these domain-specific questions:
   - "Note: Core photo generation uses AI image generation and is expensive - always confirm count and aspects before generating"
   - "What data formats will you work with? (LAS, SEG-Y, WITSML, PRODML, DLIS)"
   - "Do you need OSDU-compliant data structures?"
-  
+
+- **Core Photo Requirements (if selected):**
+  - "How many core photos do you need? (This is an expensive operation - each image costs API credits)"
+  - "What lithology should the cores represent? (sandstone, shale, carbonate, limestone, dolomite)"
+  - "Do you need specific visual features? (fractures, oil staining, bedding angles)"
+  - "Do you need full geological context? (depth range, formation, field name, well metadata)"
+   
 - **Domain Context:**
   - "Which pipeline does this belong to? (Exploration, Drilling, Reservoir & Production, Midstream, Refining)"
   - "Who are the primary users? (Geologists, Geophysicists, Drilling Engineers, Production Engineers, Pipeline Engineers, Process Engineers)"
