@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import Papa from 'papaparse'
-  import { listFiles, downloadFileUrl } from '../lib/api'
+  import { loadWellPressures } from '../lib/api'
+  import type { WellPressure } from '../lib/api'
   import NavBar from '../components/NavBar.svelte'
   import ReservoirMap from '../components/ReservoirMap.svelte'
   import Alert from '../components/ui/Alert.svelte'
@@ -10,40 +10,13 @@
   interface Props { name: string }
   let { name }: Props = $props()
 
-  interface WellData { wellName: string; avgPressure: number }
-
-  let wells: WellData[] = $state([])
+  let wells: WellPressure[] = $state([])
   let loading = $state(true)
   let pageError = $state('')
 
   onMount(async () => {
     try {
-      const files = await listFiles(name, 'production')
-      const apiKey = localStorage.getItem('reservoir_api_key') ?? ''
-
-      const results = await Promise.all(
-        files.map(async (file) => {
-          const res = await fetch(downloadFileUrl(name, 'production', file), {
-            headers: { 'X-API-Key': apiKey },
-          })
-          if (!res.ok) return null
-          const text = await res.text()
-          const parsed = Papa.parse<Record<string, string>>(text, {
-            header: true,
-            skipEmptyLines: true,
-          })
-          const pressures = parsed.data
-            .map(r => parseFloat(r['wellhead_pressure_psi']))
-            .filter(v => isFinite(v))
-          if (pressures.length === 0) return null
-          const avg = pressures.reduce((a, b) => a + b, 0) / pressures.length
-          // Derive well name from filename: "PPR1-Well-001_production.csv" → "PPR1-Well-001"
-          const wellName = file.replace(/_production\.csv$/i, '')
-          return { wellName, avgPressure: avg } satisfies WellData
-        })
-      )
-
-      wells = results.filter((r): r is WellData => r !== null)
+      wells = await loadWellPressures(name)
     } catch (e: unknown) {
       pageError = e instanceof Error ? e.message : String(e)
     } finally {
