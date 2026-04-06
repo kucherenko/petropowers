@@ -1,5 +1,4 @@
 """Tests for SCADAMapper OSDU manifest generator."""
-import pytest
 import tempfile
 import os
 import pandas as pd
@@ -71,4 +70,4 @@ def test_scada_mapper_well_name_in_id():
             legal_tags={"legaltags": ["tag"]},
         )
         entity_id = manifest["data"]["WorkProduct"]["id"]
-        assert "PPR1" in entity_id or "PPR1-Well-007" in entity_id
+        assert "PPR1-Well-007" in entity_id
