@@ -1,31 +1,50 @@
-export interface WellPosition {
-  wellName: string
-  x: number  // normalized 0–1
-  y: number  // normalized 0–1
-}
+import type { ReservoirGeometry, MappedWell } from './types'
+import type { WellPressure } from './api'
 
-/** Deterministic jitter derived from a string seed. Returns a value in ±0.04. */
-export function nameJitter(seed: string): number {
-  const hash = seed.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0)
-  return ((hash % 17) / 17 - 0.5) * 0.08
+/**
+ * Inner-join geometry and pressure data on well name.
+ * Only wells present in both datasets are returned.
+ * Note: geometry uses `name`, pressure uses `wellName` — this function handles the mapping.
+ */
+export function mergeGeometryAndPressure(
+  geometry: ReservoirGeometry,
+  pressures: WellPressure[]
+): MappedWell[] {
+  const pressureMap = new Map(pressures.map(p => [p.wellName, p.avgPressure]))
+  return geometry.wells
+    .filter(w => pressureMap.has(w.name))
+    .map(w => ({
+      name: w.name,
+      x_m: w.x_m,
+      y_m: w.y_m,
+      avgPressure: pressureMap.get(w.name)!,
+    }))
 }
 
 /**
- * Compute synthetic grid positions for a list of well names.
- * Wells are sorted before layout so positions are stable regardless of input order.
+ * Inverse-distance weighting interpolation.
+ * Returns the pressure at (x, y) weighted by distance^power to each well.
+ * If the query point is within 0.1 m of a well, returns that well's pressure directly.
  */
-export function computeWellPositions(wellNames: string[]): WellPosition[] {
-  const sorted = [...wellNames].sort()
-  const cols = Math.ceil(Math.sqrt(sorted.length))
-  const rows = Math.ceil(sorted.length / cols)
-
-  return sorted.map((name, i) => {
-    const col = i % cols
-    const row = Math.floor(i / cols)
-    const x = Math.max(0, Math.min(1, (col + 0.5) / cols + nameJitter(name + 'x')))
-    const y = Math.max(0, Math.min(1, (row + 0.5) / rows + nameJitter(name + 'y')))
-    return { wellName: name, x, y }
-  })
+export function interpolatePressure(
+  x: number,
+  y: number,
+  wells: MappedWell[],
+  power = 2
+): number {
+  for (const w of wells) {
+    const d = Math.sqrt((x - w.x_m) ** 2 + (y - w.y_m) ** 2)
+    if (d < 0.1) return w.avgPressure
+  }
+  let num = 0
+  let den = 0
+  for (const w of wells) {
+    const d = Math.sqrt((x - w.x_m) ** 2 + (y - w.y_m) ** 2)
+    const w_i = 1 / d ** power
+    num += w_i * w.avgPressure
+    den += w_i
+  }
+  return den === 0 ? 0 : num / den
 }
 
 /** Return hex color for a pressure value based on quartile across all pressures. */
