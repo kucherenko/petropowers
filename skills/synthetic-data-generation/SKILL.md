@@ -163,6 +163,28 @@ User says:
 
 → Creates LAS files + OSDU-compliant JSON manifests
 
+User says:
+```
+"Generate core photos for testing"
+```
+
+→ Ask: "How many?" then "What lithology?" then generate
+
+User says:
+```
+"I need 5 sandstone core photos with visible fractures"
+```
+
+→ Confirms count (5), lithology (sandstone), feature (fractures) → generate
+
+User says:
+```
+"Generate synthetic data for my reservoir project"
+```
+
+→ Ask: "What type of data? (well logs, seismic, core photos, production data)"
+→ If core photos selected, proceed with mandatory questions
+
 ## Software Tasks
 
 If user requests:
