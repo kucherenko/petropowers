@@ -3,6 +3,7 @@ from fastapi import FastAPI
 
 from .routes.catalogue import router as catalogue_router
 from .routes.download import router as download_router
+from .routes.geometry import router as geometry_router
 
 app = FastAPI(
     title="Synthetic Data API",
@@ -29,6 +30,7 @@ When `API_KEY` is unset the service is open to all callers.
 """,
 )
 
+app.include_router(geometry_router)
 app.include_router(catalogue_router)
 app.include_router(download_router)
 
