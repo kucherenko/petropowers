@@ -18,171 +18,312 @@
 
         .reveal {
             background: linear-gradient(135deg, var(--petroleum-blue) 0%, #0d1b2a 100%);
+            font-size: 24px;
         }
 
-        .reveal h1, .reveal h2, .reveal h3 {
-            color: var(--light-text);
-            text-transform: none;
-            font-weight: 600;
+        .reveal .slides {
+            text-align: center;
+        }
+
+        .reveal .slides > section {
+            padding: 20px 40px;
+            box-sizing: border-box;
         }
 
         .reveal h1 {
-            font-size: 2.2em;
+            color: var(--light-text);
+            text-transform: none;
+            font-weight: 600;
+            font-size: 2em;
+            margin-bottom: 0.3em;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
         }
 
         .reveal h2 {
-            font-size: 1.6em;
             color: var(--energy-orange);
-            margin-bottom: 0.8em;
+            text-transform: none;
+            font-weight: 600;
+            font-size: 1.4em;
+            margin-bottom: 0.4em;
         }
 
-        .reveal p, .reveal li {
+        .reveal p {
             color: var(--light-text);
-            font-size: 0.85em;
-            line-height: 1.5;
+            font-size: 0.75em;
+            line-height: 1.4;
+            margin: 0.3em 0;
         }
 
         .reveal .subtitle {
             color: var(--muted-text);
-            font-size: 1.2em;
-            margin-top: 0.5em;
+            font-size: 1em;
         }
 
         .reveal .tagline {
             color: var(--energy-orange);
             font-style: italic;
-            margin-top: 1.5em;
-            font-size: 0.95em;
+            font-size: 0.8em;
+            margin-top: 1em;
         }
 
+        /* Tables - compact */
         .reveal table {
             margin: 0 auto;
             border-collapse: collapse;
-            font-size: 0.7em;
+            font-size: 0.55em;
+            width: 90%;
         }
 
         .reveal table th {
             background: var(--petroleum-light);
             color: var(--light-text);
-            padding: 12px 20px;
+            padding: 8px 12px;
             text-align: left;
             border-bottom: 2px solid var(--energy-orange);
         }
 
         .reveal table td {
-            padding: 10px 20px;
+            padding: 6px 12px;
             border-bottom: 1px solid var(--steel-gray);
             color: var(--light-text);
         }
 
-        .reveal table tr:hover td {
-            background: rgba(255,255,255,0.05);
-        }
-
+        /* Highlight box - compact */
         .reveal .highlight-box {
             background: rgba(237, 137, 54, 0.15);
-            border-left: 4px solid var(--energy-orange);
-            padding: 15px 20px;
-            margin: 20px 0;
+            border-left: 3px solid var(--energy-orange);
+            padding: 10px 15px;
+            margin: 12px auto;
             text-align: left;
+            font-size: 0.65em;
+            max-width: 90%;
         }
 
+        /* Platform grid - compact */
         .reveal .platform-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-            margin-top: 30px;
+            gap: 12px;
+            margin: 15px auto;
+            max-width: 95%;
         }
 
         .reveal .platform-item {
             background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 20px 15px;
+            border-radius: 8px;
+            padding: 12px 8px;
             text-align: center;
-            transition: transform 0.2s;
-        }
-
-        .reveal .platform-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.15);
+            font-size: 0.6em;
         }
 
         .reveal .platform-item .icon {
-            font-size: 2em;
-            margin-bottom: 10px;
+            font-size: 1.8em;
+            margin-bottom: 6px;
         }
 
-        .reveal .pipeline-flow {
+        .reveal .platform-item small {
+            color: var(--muted-text);
+            font-size: 0.8em;
+        }
+
+        /* Problem grid - compact */
+        .reveal .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 15px auto;
+            max-width: 95%;
+        }
+
+        .reveal .problem-item {
+            background: rgba(220, 38, 38, 0.1);
+            border-left: 3px solid #dc2626;
+            padding: 10px 12px;
+            text-align: left;
+        }
+
+        .reveal .problem-item h4 {
+            color: #fca5a5;
+            font-size: 0.7em;
+            margin: 0 0 4px 0;
+        }
+
+        .reveal .problem-item p {
+            color: var(--muted-text);
+            font-size: 0.55em;
+            margin: 0;
+        }
+
+        /* Delegation - compact */
+        .reveal .delegation-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin: 30px 0;
-            flex-wrap: wrap;
+            align-items: stretch;
+            gap: 20px;
+            margin: 15px auto;
+            max-width: 95%;
         }
 
-        .reveal .pipeline-stage {
-            background: var(--petroleum-light);
-            padding: 12px 18px;
-            border-radius: 8px;
-            font-size: 0.75em;
-            font-weight: 600;
-            color: var(--light-text);
+        .reveal .domain-box, .reveal .dev-box {
+            border-radius: 10px;
+            padding: 12px;
+            width: 180px;
+            font-size: 0.6em;
         }
 
-        .reveal .pipeline-arrow {
+        .reveal .domain-box {
+            background: rgba(44, 82, 130, 0.4);
+            border: 2px solid var(--petroleum-light);
+        }
+
+        .reveal .dev-box {
+            background: rgba(237, 137, 54, 0.2);
+            border: 2px solid var(--energy-orange);
+        }
+
+        .reveal .domain-box h4, .reveal .dev-box h4 {
+            font-size: 1.1em;
+            margin: 0 0 8px 0;
+            text-align: center;
+        }
+
+        .reveal .domain-box h4 { color: var(--light-text); }
+        .reveal .dev-box h4 { color: var(--energy-orange); }
+
+        .reveal .domain-box ul, .reveal .dev-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .reveal .domain-box li, .reveal .dev-box li {
+            margin: 4px 0;
+            color: var(--muted-text);
+            padding-left: 12px;
+            position: relative;
+            font-size: 0.9em;
+        }
+
+        .reveal .domain-box li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--petroleum-light);
+        }
+
+        .reveal .dev-box li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
             color: var(--energy-orange);
-            font-size: 1.5em;
         }
 
+        .reveal .box-footer {
+            margin-top: 8px;
+            padding-top: 6px;
+            border-top: 1px solid var(--steel-gray);
+            font-size: 0.8em;
+            color: var(--muted-text);
+        }
+
+        .reveal .delegation-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--energy-orange);
+            font-size: 0.6em;
+        }
+
+        .reveal .delegation-arrow .arrow-text {
+            font-weight: 600;
+            margin: 4px 0;
+        }
+
+        .reveal .delegation-arrow .arrow-icon {
+            font-size: 1.8em;
+        }
+
+        .reveal .example-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            padding: 10px 15px;
+            margin: 12px auto;
+            font-size: 0.6em;
+            max-width: 90%;
+        }
+
+        .reveal .example-box code {
+            background: rgba(237, 137, 54, 0.3);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--energy-orange);
+        }
+
+        /* Workflow - compact */
         .reveal .workflow-container {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin: 25px 0;
-            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 6px;
+            margin: 12px auto;
+            max-width: 98%;
         }
 
         .reveal .workflow-step {
             background: var(--petroleum-light);
-            border-radius: 8px;
-            padding: 15px;
-            width: 140px;
+            border-radius: 6px;
+            padding: 10px 8px;
+            width: 110px;
             text-align: center;
         }
 
         .reveal .workflow-step h4 {
             color: var(--energy-orange);
-            font-size: 0.8em;
-            margin: 0 0 10px 0;
+            font-size: 0.65em;
+            margin: 0 0 6px 0;
         }
 
         .reveal .workflow-step ul {
             list-style: none;
             padding: 0;
             margin: 0;
-            font-size: 0.6em;
+            font-size: 0.5em;
             text-align: left;
         }
 
         .reveal .workflow-step li {
-            margin: 5px 0;
+            margin: 3px 0;
             color: var(--muted-text);
         }
 
         .reveal .workflow-arrow {
             color: var(--energy-orange);
-            font-size: 1.5em;
+            font-size: 1.2em;
             display: flex;
             align-items: center;
+            padding-top: 15px;
         }
 
+        .reveal .key-principle {
+            background: rgba(237, 137, 54, 0.2);
+            border: 1px solid var(--energy-orange);
+            border-radius: 6px;
+            padding: 10px 15px;
+            margin: 12px auto;
+            font-style: italic;
+            font-size: 0.6em;
+            max-width: 90%;
+        }
+
+        /* Results - compact */
         .reveal .results-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 20px;
+            gap: 25px;
+            margin: 15px auto;
+            max-width: 90%;
         }
 
         .reveal .results-section {
@@ -191,19 +332,22 @@
 
         .reveal .results-section h3 {
             color: var(--energy-orange);
-            font-size: 1em;
-            margin-bottom: 15px;
+            font-size: 0.85em;
+            margin-bottom: 10px;
         }
 
         .reveal .results-section ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         .reveal .results-section li {
-            margin: 10px 0;
-            padding-left: 25px;
+            margin: 6px 0;
+            padding-left: 20px;
             position: relative;
+            font-size: 0.6em;
+            color: var(--light-text);
         }
 
         .reveal .results-section li::before {
@@ -217,236 +361,61 @@
             content: "→";
         }
 
-        .reveal .problem-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .reveal .problem-item {
-            background: rgba(220, 38, 38, 0.1);
-            border-left: 3px solid #dc2626;
-            padding: 15px;
-            text-align: left;
-        }
-
-        .reveal .problem-item h4 {
-            color: #fca5a5;
-            font-size: 0.8em;
-            margin: 0 0 8px 0;
-        }
-
-        .reveal .problem-item p {
-            color: var(--muted-text);
-            font-size: 0.7em;
-            margin: 0;
-        }
-
-        .reveal .key-principle {
-            background: rgba(237, 137, 54, 0.2);
-            border: 1px solid var(--energy-orange);
-            border-radius: 8px;
-            padding: 15px 25px;
-            margin-top: 25px;
-            font-style: italic;
-        }
-
-        .reveal .center-diagram {
-            background: rgba(255,255,255,0.05);
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            border: 3px solid var(--energy-orange);
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-
-        .reveal .hub-spoke {
-            position: relative;
-            height: 350px;
-            margin: 20px auto;
-        }
-
-        .reveal .delegation-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .reveal .domain-box {
-            background: rgba(44, 82, 130, 0.4);
-            border: 2px solid var(--petroleum-light);
-            border-radius: 12px;
-            padding: 15px;
-            width: 200px;
-        }
-
-        .reveal .domain-box h4 {
-            color: var(--light-text);
-            font-size: 0.85em;
-            margin: 0 0 10px 0;
-            text-align: center;
-        }
-
-        .reveal .domain-box ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 0.65em;
-        }
-
-        .reveal .domain-box li {
-            margin: 6px 0;
-            color: var(--muted-text);
-            padding-left: 15px;
-            position: relative;
-        }
-
-        .reveal .domain-box li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--petroleum-light);
-        }
-
-        .reveal .dev-box {
-            background: rgba(237, 137, 54, 0.2);
-            border: 2px solid var(--energy-orange);
-            border-radius: 12px;
-            padding: 15px;
-            width: 200px;
-        }
-
-        .reveal .dev-box h4 {
-            color: var(--energy-orange);
-            font-size: 0.85em;
-            margin: 0 0 10px 0;
-            text-align: center;
-        }
-
-        .reveal .dev-box ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 0.65em;
-        }
-
-        .reveal .dev-box li {
-            margin: 6px 0;
-            color: var(--muted-text);
-            padding-left: 15px;
-            position: relative;
-        }
-
-        .reveal .dev-box li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--energy-orange);
-        }
-
-        .reveal .delegation-arrow {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--energy-orange);
-            font-size: 0.7em;
-            padding-top: 30px;
-        }
-
-        .reveal .delegation-arrow .arrow-text {
-            writing-mode: horizontal-tb;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .reveal .delegation-arrow .arrow-icon {
-            font-size: 2em;
-        }
-
-        .reveal .example-box {
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            padding: 12px 20px;
-            margin-top: 20px;
-            font-size: 0.7em;
-            text-align: center;
-        }
-
-        .reveal .example-box code {
-            background: rgba(237, 137, 54, 0.3);
-            padding: 3px 8px;
-            border-radius: 4px;
-            color: var(--energy-orange);
-        }
-
+        /* Examples - compact */
         .reveal .examples-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 25px;
+            gap: 15px;
+            margin: 15px auto;
+            max-width: 95%;
         }
 
         .reveal .example-card {
             background: rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 10px;
+            padding: 12px;
             text-align: left;
             border: 1px solid var(--steel-gray);
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .reveal .example-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--energy-orange);
         }
 
         .reveal .example-card .card-icon {
-            font-size: 2em;
-            margin-bottom: 12px;
+            font-size: 1.6em;
+            margin-bottom: 8px;
         }
 
         .reveal .example-card h4 {
             color: var(--energy-orange);
-            font-size: 0.9em;
-            margin: 0 0 10px 0;
+            font-size: 0.75em;
+            margin: 0 0 6px 0;
         }
 
         .reveal .example-card p {
             color: var(--muted-text);
-            font-size: 0.65em;
-            margin: 0 0 12px 0;
-            line-height: 1.4;
+            font-size: 0.5em;
+            margin: 0 0 8px 0;
+            line-height: 1.3;
         }
 
         .reveal .example-card .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 4px;
         }
 
         .reveal .example-card .tech-tag {
             background: rgba(44, 82, 130, 0.5);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.55em;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.45em;
             color: var(--light-text);
         }
 
         .reveal .example-card .file-path {
             font-family: monospace;
-            font-size: 0.6em;
+            font-size: 0.45em;
             color: var(--steel-gray);
-            margin-top: 10px;
-            padding-top: 10px;
+            margin-top: 8px;
+            padding-top: 6px;
             border-top: 1px solid var(--steel-gray);
         }
     </style>
@@ -459,9 +428,9 @@
             <section>
                 <h1>AI in Oil & Gas</h1>
                 <p class="subtitle">A Skills Framework Approach</p>
-                <div style="margin-top: 60px;">
-                    <p style="font-size: 1.4em; color: var(--energy-orange); font-weight: 600;">PetroPowers</p>
-                    <p style="color: var(--muted-text);">Research & Implementation</p>
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 1.2em; color: var(--energy-orange); font-weight: 600;">PetroPowers</p>
+                    <p style="color: var(--muted-text); font-size: 0.8em;">Research & Implementation</p>
                 </div>
                 <p class="tagline">"Bringing domain intelligence to world-leading AI agents"</p>
             </section>
@@ -469,7 +438,7 @@
             <!-- Slide 2: The Challenge -->
             <section>
                 <h2>The Challenge</h2>
-                <p style="margin-bottom: 30px;">Why General AI Struggles in Petroleum Engineering</p>
+                <p>Why General AI Struggles in Petroleum Engineering</p>
                 
                 <div class="problem-grid">
                     <div class="problem-item">
@@ -504,31 +473,31 @@
                     <div class="platform-item">
                         <div class="icon">🤖</div>
                         <div>Claude Code</div>
-                        <small style="color: var(--muted-text);">Anthropic</small>
+                        <small>Anthropic</small>
                     </div>
                     <div class="platform-item">
                         <div class="icon">⚡</div>
                         <div>OpenCode</div>
-                        <small style="color: var(--muted-text);">Open Source</small>
+                        <small>Open Source</small>
                     </div>
                     <div class="platform-item">
                         <div class="icon">🧠</div>
                         <div>Codex CLI</div>
-                        <small style="color: var(--muted-text);">OpenAI</small>
+                        <small>OpenAI</small>
                     </div>
                     <div class="platform-item">
                         <div class="icon">💎</div>
                         <div>Gemini CLI</div>
-                        <small style="color: var(--muted-text);">Google</small>
+                        <small>Google</small>
                     </div>
                     <div class="platform-item">
                         <div class="icon">📝</div>
                         <div>Cursor</div>
-                        <small style="color: var(--muted-text);">IDE</small>
+                        <small>IDE</small>
                     </div>
                 </div>
 
-                <p style="margin-top: 30px; color: var(--muted-text); font-size: 0.8em;">Same skills, any platform — agents learn domain expertise through reusable skill definitions</p>
+                <p style="margin-top: 15px; color: var(--muted-text); font-size: 0.65em;">Same skills, any platform — agents learn domain expertise through reusable skill definitions</p>
             </section>
 
             <!-- Slide 4: Domain Intelligence -->
@@ -546,15 +515,15 @@
                             <li>Midstream & Pipelines</li>
                             <li>Refining & Processing</li>
                         </ul>
-                        <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--steel-gray); font-size: 0.6em; color: var(--muted-text);">
-                            Understands terminology, data formats, safety requirements
+                        <div class="box-footer">
+                            Understands terminology, data formats, safety
                         </div>
                     </div>
 
                     <div class="delegation-arrow">
                         <span class="arrow-text">DELEGATES</span>
                         <span class="arrow-icon">⟶</span>
-                        <span class="arrow-text" style="margin-top: 8px;">RETURNS</span>
+                        <span class="arrow-text">RETURNS</span>
                         <span class="arrow-icon">⟵</span>
                     </div>
 
@@ -567,7 +536,7 @@
                             <li>Subagent Execution</li>
                             <li>Code Review</li>
                         </ul>
-                        <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--energy-orange); font-size: 0.6em; color: var(--muted-text);">
+                        <div class="box-footer">
                             Rigorous software engineering practices
                         </div>
                     </div>
@@ -575,7 +544,7 @@
 
                 <div class="example-box">
                     <strong>Example:</strong> "Build a decline curve analyzer" → Domain skill understands <code>decline curves</code>, 
-                    delegates to <code>brainstorming</code> → <code>TDD</code> → <code>review</code>, returns working software with domain context preserved
+                    delegates to dev workflow, returns working software with domain context preserved
                 </div>
             </section>
 
@@ -678,7 +647,7 @@
                     </tbody>
                 </table>
 
-                <div class="highlight-box" style="margin-top: 25px;">
+                <div class="highlight-box">
                     <strong>Use Cases:</strong> Testing, demos, training, development without real data
                 </div>
             </section>
@@ -692,7 +661,7 @@
                     <div class="example-card">
                         <div class="card-icon">📊</div>
                         <h4>Dataset Generator</h4>
-                        <p>Complete synthetic oil field with 50 wells: logs, seismic, production, trajectories, core photos, OSDU manifests</p>
+                        <p>Complete synthetic oil field with 50 wells: logs, seismic, production, trajectories, core photos</p>
                         <div class="tech-stack">
                             <span class="tech-tag">Python</span>
                             <span class="tech-tag">lasio</span>
@@ -705,7 +674,7 @@
                     <div class="example-card">
                         <div class="card-icon">🔌</div>
                         <h4>Data API Service</h4>
-                        <p>FastAPI service for browsing and downloading synthetic datasets. Catalogue endpoints, file serving, optional auth.</p>
+                        <p>FastAPI service for browsing and downloading synthetic datasets with optional authentication</p>
                         <div class="tech-stack">
                             <span class="tech-tag">FastAPI</span>
                             <span class="tech-tag">Python</span>
@@ -717,7 +686,7 @@
                     <div class="example-card">
                         <div class="card-icon">🖥️</div>
                         <h4>Reservoir Webapp</h4>
-                        <p>Interactive web application for reservoir data visualization and exploration.</p>
+                        <p>Interactive web application for reservoir data visualization and exploration</p>
                         <div class="tech-stack">
                             <span class="tech-tag">Svelte</span>
                             <span class="tech-tag">TypeScript</span>
@@ -728,8 +697,8 @@
                     </div>
                 </div>
 
-                <div class="highlight-box" style="margin-top: 25px;">
-                    <strong>All examples built autonomously</strong> using the PetroPowers workflow: brainstorming → planning → TDD → subagent execution → review
+                <div class="highlight-box">
+                    <strong>All examples built autonomously</strong> using PetroPowers workflow: brainstorming → planning → TDD → execution → review
                 </div>
             </section>
 
@@ -761,8 +730,8 @@
                     </div>
                 </div>
 
-                <div style="margin-top: 40px; text-align: center;">
-                    <p style="color: var(--energy-orange); font-size: 1.1em; font-weight: 600;">github.com/kucherenko/petropowers</p>
+                <div style="margin-top: 25px; text-align: center;">
+                    <p style="color: var(--energy-orange); font-size: 0.9em; font-weight: 600;">github.com/kucherenko/petropowers</p>
                 </div>
             </section>
 
@@ -777,8 +746,9 @@
             transition: 'slide',
             backgroundTransition: 'fade',
             center: true,
-            width: 1200,
-            height: 700
+            width: 1100,
+            height: 700,
+            margin: 0.04
         });
     </script>
 </body>
