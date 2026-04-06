@@ -1,0 +1,14 @@
+.worktrees/
+.private-journal/
+.claude/
+.DS_Store
+node_modules/
+inspo
+triage/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
