@@ -3,23 +3,45 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light mode — Geoscience Blue tinted */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 214 100% 97%;
+    --foreground: 215 51% 24%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --card-foreground: 215 51% 24%;
+    --primary: 224 71% 46%;
+    --primary-foreground: 214 100% 97%;
+    --secondary: 214 89% 93%;
+    --secondary-foreground: 215 51% 24%;
+    --muted: 214 89% 93%;
+    --muted-foreground: 217 91% 60%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 213 97% 87%;
+    --input: 214 89% 93%;
+    --ring: 224 71% 46%;
     --radius: 0.5rem;
   }
+
+  /* Dark mode — Geoscience Blue deep navy */
+  :root.dark {
+    --background: 216 67% 12%;
+    --foreground: 206 100% 97%;
+    --card: 215 65% 17%;
+    --card-foreground: 206 100% 97%;
+    --primary: 207 82% 67%;
+    --primary-foreground: 216 67% 12%;
+    --secondary: 215 64% 28%;
+    --secondary-foreground: 206 100% 97%;
+    --muted: 215 64% 28%;
+    --muted-foreground: 207 79% 77%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 206 100% 97%;
+    --border: 215 55% 35%;
+    --input: 215 64% 28%;
+    --ring: 207 82% 67%;
+  }
+
   * { @apply border-border; }
   body { @apply bg-background text-foreground; }
 }
