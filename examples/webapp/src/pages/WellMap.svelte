@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { loadWellPressures } from '../lib/api'
+  import { loadWellPressures, loadReservoirGeometry } from '../lib/api'
   import type { WellPressure } from '../lib/api'
+  import type { ReservoirGeometry } from '../lib/types'
   import NavBar from '../components/NavBar.svelte'
   import ReservoirMap from '../components/ReservoirMap.svelte'
   import Alert from '../components/ui/Alert.svelte'
@@ -11,12 +12,16 @@
   let { name }: Props = $props()
 
   let wells: WellPressure[] = $state([])
+  let geometry: ReservoirGeometry | null = $state(null)
   let loading = $state(true)
   let pageError = $state('')
 
   onMount(async () => {
     try {
-      wells = await loadWellPressures(name)
+      ;[wells, geometry] = await Promise.all([
+        loadWellPressures(name),
+        loadReservoirGeometry(name),
+      ])
     } catch (e: unknown) {
       pageError = e instanceof Error ? e.message : String(e)
     } finally {
@@ -31,8 +36,8 @@
     <Alert variant="destructive">{pageError}</Alert>
   {:else if loading}
     <div class="flex justify-center py-12"><Spinner class="h-8 w-8" /></div>
-  {:else if wells.length === 0}
-    <p class="text-muted-foreground">No production data available to build the well map.</p>
+  {:else if wells.length === 0 || !geometry}
+    <p class="text-muted-foreground">No production or geometry data available to build the well map.</p>
   {:else}
     <div class="mb-4 flex items-center gap-4 flex-wrap">
       <div class="flex items-center gap-2 text-sm">
@@ -46,6 +51,6 @@
       </div>
       <div class="text-sm text-muted-foreground ml-auto">Bubble size ∝ avg pressure</div>
     </div>
-    <ReservoirMap {wells} reservoirName={name} width={700} height={450} />
+    <ReservoirMap {wells} {geometry} reservoirName={name} width={700} height={450} />
   {/if}
 </main>

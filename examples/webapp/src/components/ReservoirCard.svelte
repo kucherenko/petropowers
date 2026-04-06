@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { loadWellPressures } from '../lib/api'
+  import { loadWellPressures, loadReservoirGeometry } from '../lib/api'
   import type { WellPressure } from '../lib/api'
-  import type { ReservoirSummary } from '../lib/types'
+  import type { ReservoirSummary, ReservoirGeometry } from '../lib/types'
   import ReservoirMap from './ReservoirMap.svelte'
   import Badge from './ui/Badge.svelte'
   import Spinner from './ui/Spinner.svelte'
@@ -16,13 +16,17 @@
   let { name, summary, onclick }: Props = $props()
 
   let wells: WellPressure[] = $state([])
+  let geometry: ReservoirGeometry | null = $state(null)
   let mapLoading = $state(true)
   let mapError = $state('')
   let cardWidth = $state(0)
 
   onMount(async () => {
     try {
-      wells = await loadWellPressures(name)
+      ;[wells, geometry] = await Promise.all([
+        loadWellPressures(name),
+        loadReservoirGeometry(name),
+      ])
     } catch (e: unknown) {
       mapError = e instanceof Error ? e.message : String(e)
     } finally {
@@ -41,7 +45,7 @@
       <div class="flex items-center justify-center bg-[#13161f]" style="height:220px;">
         <Spinner class="h-6 w-6" />
       </div>
-    {:else if mapError || wells.length === 0}
+    {:else if mapError || wells.length === 0 || !geometry}
       <div
         class="flex items-center justify-center bg-[#13161f] text-muted-foreground text-sm"
         style="height:220px;"
@@ -49,7 +53,7 @@
         No well data
       </div>
     {:else}
-      <ReservoirMap {wells} reservoirName={name} width={cardWidth || 400} height={220} />
+      <ReservoirMap {wells} {geometry} reservoirName={name} width={cardWidth || 400} height={220} />
     {/if}
   </div>
 
