@@ -73,7 +73,7 @@ These tasks are handled by this skill:
 
 ## Software Tasks
 
-These tasks invoke `superpowers:oil-gas-delegation`:
+These tasks invoke `petropowers:oil-gas-delegation`:
 
 - SCADA monitoring dashboard
 - Pipeline scheduling system

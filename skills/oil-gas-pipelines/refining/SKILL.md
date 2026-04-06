@@ -77,7 +77,7 @@ These tasks are handled by this skill:
 
 ## Software Tasks
 
-These tasks invoke `superpowers:oil-gas-delegation`:
+These tasks invoke `petropowers:oil-gas-delegation`:
 
 - Process monitoring dashboard
 - Laboratory information system (LIMS)

@@ -22,8 +22,8 @@ Support geoscientists in discovering hydrocarbon prospects through seismic inter
 
 | Data | Format | Skill Reference |
 |------|--------|-----------------|
-| Seismic volumes | SEG-Y | `superpowers:oil-gas-cross-cutting/segy-operations` |
-| Well logs | LAS | `superpowers:oil-gas-cross-cutting/well-log-analysis` |
+| Seismic volumes | SEG-Y | `petropowers:oil-gas-cross-cutting/segy-operations` |
+| Well logs | LAS | `petropowers:oil-gas-cross-cutting/well-log-analysis` |
 | Geological models | RESQML, proprietary | Custom parsing needed |
 | Core samples | Photos, reports | Unstructured analysis |
 | Satellite/gravity | GeoTIFF, grids | Geospatial tools |
@@ -85,7 +85,7 @@ These tasks are handled by this skill:
 
 ## Software Tasks
 
-These tasks invoke `superpowers:oil-gas-delegation`:
+These tasks invoke `petropowers:oil-gas-delegation`:
 
 - Seismic visualization web application
 - Prospect database system

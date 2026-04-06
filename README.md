@@ -65,46 +65,14 @@ PetroPowers includes all Superpowers general skills plus oil & gas domain specia
 
 **Note:** Installation differs by platform. Claude Code and Cursor have built-in plugin marketplaces. Codex and OpenCode require manual setup.
 
-### Claude Code Official Marketplace (TODO not ready yet)
-
-PetroPowers is available via the [official Claude plugin marketplace](https://claude.com/plugins/petropowers)
-
-Install the plugin from Claude marketplace:
-
-```bash
-/plugin install petropowers@claude-plugins-official
-```
-
-### Claude Code (via Plugin Marketplace) (TODO not ready yet)
-
-In Claude Code, register the marketplace first:
-
-```bash
-/plugin marketplace add kucherenko/petropowers-marketplace
-```
-
-Then install the plugin from this marketplace:
-
-```bash
-/plugin install petropowers@petropowers-marketplace
-```
-
-### Cursor (via Plugin Marketplace) (TODO not ready yet)
-
-In Cursor Agent chat, install from marketplace:
-
-```text
-/add-plugin petropowers
-```
-
-or search for "petropowers" in the plugin marketplace.
+See [docs/future-plans.md](docs/future-plans.md) for planned marketplace integrations (Claude Code Official, Claude Code via Marketplace, Cursor).
 
 ### Codex
 
 Tell Codex:
 
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/obra/petropowers/refs/heads/main/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/kucherenko/petropowers/refs/heads/main/.codex/INSTALL.md
 ```
 
 **Detailed docs:** [docs/README.codex.md](docs/README.codex.md)
@@ -114,29 +82,10 @@ Fetch and follow instructions from https://raw.githubusercontent.com/obra/petrop
 Tell OpenCode:
 
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/obra/petropowers/refs/heads/main/.opencode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/kucherenko/petropowers/refs/heads/main/.opencode/INSTALL.md
 ```
 
 **Detailed docs:** [docs/README.opencode.md](docs/README.opencode.md)
-
-### GitHub Copilot CLI
-
-```bash
-copilot plugin marketplace add obra/petropowers-marketplace
-copilot plugin install petropowers@petropowers-marketplace
-```
-
-### Gemini CLI
-
-```bash
-gemini extensions install https://github.com/obra/petropowers
-```
-
-To update:
-
-```bash
-gemini extensions update petropowers
-```
 
 ### Verify Installation
 
@@ -383,11 +332,9 @@ General development workflow skills (TDD, debugging, planning, collaboration) ar
 
 ## Community
 
-PetroPowers is maintained by [Your Team/Name].
-
-- **Issues**: [Your repository issues URL]
-- **Discussions**: [Your discussion platform, if any]
-- **Petroleum Engineering AI**: [Community/discord/slack, if applicable]
+- **Repository**: https://github.com/kucherenko/petropowers
+- **Issues**: https://github.com/kucherenko/petropowers/issues
+- **Maintainer**: [Andrii Kucherenko](https://github.com/kucherenko)
 
 ### Upstream Community (Superpowers)
 

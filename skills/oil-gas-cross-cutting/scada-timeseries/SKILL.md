@@ -394,9 +394,9 @@ print(f"Median used for replacement: {data['pressure_psi'].median()}")
 ## Software Tasks
 
 If user requests:
-- Real-time monitoring dashboard → invoke `superpowers:oil-gas-delegation`
-- Anomaly detection system → invoke `superpowers:oil-gas-delegation`
-- WITSML data integration → invoke `superpowers:oil-gas-delegation`
+- Real-time monitoring dashboard → invoke `petropowers:oil-gas-delegation`
+- Anomaly detection system → invoke `petropowers:oil-gas-delegation`
+- WITSML data integration → invoke `petropowers:oil-gas-delegation`
 
 ## Quick Reference
 
@@ -646,6 +646,6 @@ ingest_realtime_to_osdu(
 ### Software Tasks
 
 If user requests:
-- OSDU real-time ingestion system → invoke `superpowers:oil-gas-delegation`
-- WITSML/PRODML parser web app → invoke `superpowers:oil-gas-delegation`
+- OSDU real-time ingestion system → invoke `petropowers:oil-gas-delegation`
+- WITSML/PRODML parser web app → invoke `petropowers:oil-gas-delegation`
 - OSDU schema validator → stay in domain skill (validate against OSDU schemas)

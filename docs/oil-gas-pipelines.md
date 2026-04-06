@@ -1,10 +1,10 @@
 # Oil & Gas Pipeline Documentation
 
-This document provides comprehensive documentation for the oil & gas domain skills in Superpowers. These skills help AI agents work effectively with petroleum engineering, drilling operations, reservoir management, pipeline operations, and refining processes.
+This document provides comprehensive documentation for the oil & gas domain skills in PetroPowers. These skills help AI agents work effectively with petroleum engineering, drilling operations, reservoir management, pipeline operations, and refining processes.
 
 ## Introduction
 
-Superpowers organizes oil & gas skills into two categories:
+PetroPowers organizes oil & gas skills into two categories:
 
 ### Domain Skills
 Provide industry-specific knowledge and workflows:
@@ -18,7 +18,7 @@ Domain skills handle interpretation, analysis, and engineering recommendations u
 
 ### Development Skills
 Provide software engineering workflows for building tools:
-- When domain work requires building software (dashboards, APIs, databases), the delegation skill routes to Superpowers development skills
+- When domain work requires building software (dashboards, APIs, databases), the delegation skill routes to PetroPowers development skills
 - The delegation skill detects software tasks and invokes `brainstorming`, `writing-plans`, and implementation workflows
 - After software is built, control returns to domain skill for continued domain work
 
@@ -57,7 +57,7 @@ graph TB
         SCADA[scada-timeseries]
     end
     
-    D -.->|software tasks| DEV[superpowers<br/>development skills]
+    D -.->|software tasks| DEV[petropowers<br/>development skills]
     
     F --> E
     F --> DRL
@@ -982,10 +982,10 @@ Feedback Loop (real-time data)
 
 ### Delegation Skill (oil-gas-delegation)
 
-The delegation skill is a meta-skill that routes software development tasks to appropriate Superpowers workflows:
+The delegation skill is a meta-skill that routes software development tasks to appropriate PetroPowers workflows:
 
 **Purpose:**
-Oil & gas domain skills handle interpretation, analysis, and optimization recommendations. When a request requires building software (web apps, dashboards, APIs, databases), this skill delegates to Superpowers development skills.
+Oil & gas domain skills handle interpretation, analysis, and optimization recommendations. When a request requires building software (web apps, dashboards, APIs, databases), this skill delegates to PetroPowers development skills.
 
 **Detection Logic:**
 When a request contains any of these keywords, delegate to software development workflow:
@@ -1004,7 +1004,7 @@ Does request require building software?
   ↓
   YES → Invoke oil-gas-delegation
         ↓
-        Route to appropriate superpowers workflow:
+        Route to appropriate petropowers workflow:
         - brainstorming (design)
         - writing-plans (implementation plan)
         - subagent-driven-development (execution)
@@ -1019,11 +1019,11 @@ graph TD
     A[Domain Skill<br/>Receives Request] --> B{Software Task?}
     B -->|No| C[Handle in<br/>Domain Skill]
     B -->|Yes| D[Invoke<br/>oil-gas-delegation]
-    D --> E[Route to<br/>superpowers:brainstorming]
+    D --> E[Route to<br/>petropowers:brainstorming]
     E --> F[Design Document]
     F --> G{User Approves?}
     G -->|No| E
-    G -->|Yes| H[Invoke<br/>superpowers:writing-plans]
+    G -->|Yes| H[Invoke<br/>petropowers:writing-plans]
     H --> I[Implementation Plan]
     I --> J[Execute via<br/>subagent-driven-development]
     J --> K[Software Built]
@@ -1054,22 +1054,22 @@ Domain skills provide analysis, recommendations, and domain expertise. Software 
 
 **Agent response:**
 1. Recognize: "dashboard" → software task
-2. Invoke: `superpowers:oil-gas-delegation`
+2. Invoke: `petropowers:oil-gas-delegation`
 3. Delegation skill:
-   - Invokes `superpowers:brainstorming` for dashboard design
+   - Invokes `petropowers:brainstorming` for dashboard design
    - Design: "Seismic Visualization Dashboard"
      - Upload SEG-Y files
      - Display inline/crossline/time slices
      - Filter by amplitude range
    - User approves design
-   - Invokes `superpowers:writing-plans` for implementation plan
+   - Invokes `petropowers:writing-plans` for implementation plan
    - Executes via TDD workflow
 
 **User:** "What's the porosity in this well based on the logs?"
 
 **Agent response:**
 1. Recognize: Domain analysis, no software
-2. Invoke: `superpowers:oil-gas-pipelines/exploration`
+2. Invoke: `petropowers:oil-gas-pipelines/exploration`
 3. Domain skill:
    - Reads LAS file
    - Calculates porosity from density/neutron logs
@@ -1092,10 +1092,10 @@ graph TD
     C -->|Pipelines/Transport| H[Midstream]
     C -->|Refining/Processing| I[Refining]
     
-    D --> J[brainstorming]
+    D --> J[petropowers<br/>brainstorming]
     J --> K[User Approves]
-    K --> L[writing-plans]
-    L --> M[subagent-driven-development]
+    K --> L[petropowers<br/>writing-plans]
+    L --> M[petropowers<br/>subagent-driven-development]
     M --> N[Software Built]
     N --> O[Return to Domain Skill]
     
@@ -1132,10 +1132,10 @@ graph TD
 1. Recognize: Software task ("dashboard")
 2. Invoke: `oil-gas-delegation`
 3. Delegation skill routes to:
-   - `superpowers:brainstorming` → Design dashboard
+   - `petropowers:brainstorming` → Design dashboard
    - User approval
-   - `superpowers:writing-plans` → Implementation plan
-   - `superpowers:subagent-driven-development` → Execute
+   - `petropowers:writing-plans` → Implementation plan
+   - `petropowers:subagent-driven-development` → Execute
 4. Return: Dashboard application
 
 #### Scenario 3: Porosity Calculation with Follow-up

@@ -113,7 +113,7 @@ These tasks are handled by this skill:
 
 ## Software Tasks
 
-These tasks invoke `superpowers:oil-gas-delegation`:
+These tasks invoke `petropowers:oil-gas-delegation`:
 
 - Real-time drilling monitoring dashboard
 - Rig telemetry database

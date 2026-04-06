@@ -26,7 +26,7 @@ You MUST create a task for each of these items and complete them in order:
 3. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
 4. **Propose 2-3 approaches** — with trade-offs and your recommendation
 5. **Present design** — in sections scaled to their complexity, get user approval after each section
-6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
+6. **Write design doc** — save to `docs/petropowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
 7. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
 8. **User reviews written spec** — ask user to review the spec file before proceeding
 9. **Transition to implementation** — invoke writing-plans skill to create implementation plan
@@ -77,11 +77,44 @@ digraph brainstorming {
 - Only one question per message - if a topic needs more exploration, break it into multiple questions
 - Focus on understanding: purpose, constraints, success criteria
 
+**Oil & Gas Domain Questions:**
+
+When working on oil & gas projects, consider these domain-specific questions:
+
+- **Data Requirements:**
+  - "Will this need test data? If so, should I generate synthetic well logs, seismic data, or production data for testing?"
+  - "What data formats will you work with? (LAS, SEG-Y, WITSML, PRODML, DLIS)"
+  - "Do you need OSDU-compliant data structures?"
+  
+- **Domain Context:**
+  - "Which pipeline does this belong to? (Exploration, Drilling, Reservoir & Production, Midstream, Refining)"
+  - "Who are the primary users? (Geologists, Geophysicists, Drilling Engineers, Production Engineers, Pipeline Engineers, Process Engineers)"
+  - "What are the safety-critical aspects we need to consider?"
+
+- **Physical Constraints:**
+  - "Should the synthetic data follow realistic petrophysical relationships? (e.g., Archie equation for water saturation)"
+  - "What lithology should the test data represent? (sandstone, shale, carbonate)"
+  - "Are there specific depth ranges or basin characteristics to model?"
+
+- **Integration Points:**
+  - "Will this integrate with existing E&P software? (Petrel, Eclipse, Techlog, etc.)"
+  - "Do you need real-time monitoring capabilities or batch processing?"
+  - "Should this support industry standards? (API, SPE, SEG)"
+
+Ask these questions naturally as part of the clarifying questions phase, not as a separate checklist. Only ask the questions relevant to the specific project.
+
 **Exploring approaches:**
 
 - Propose 2-3 different approaches with trade-offs
 - Present options conversationally with your recommendation and reasoning
 - Lead with your recommended option and explain why
+
+**For oil & gas projects, consider:**
+- Domain expertise vs. general-purpose solutions (when to use domain skills vs. development workflows)
+- Data generation approach (synthetic data for testing vs. using sample datasets)
+- Industry standards compliance (OSDU, API, SEG, SPE)
+- Safety and regulatory requirements
+- Integration with existing petroleum engineering software
 
 **Presenting the design:**
 
@@ -106,9 +139,26 @@ digraph brainstorming {
 
 ## After the Design
 
+**Synthetic Data Generation (Oil & Gas Projects):**
+
+If the project requires test data for oil & gas workflows:
+
+1. **Identify data needs during brainstorming:** Ask about test data requirements during the clarifying questions phase
+2. **Include in the spec:** Document what synthetic data will be needed (well logs, seismic, production data)
+3. **Reference in the plan:** The implementation plan should include tasks for generating synthetic data using the `synthetic-data-generation` skill
+
+**Common synthetic data scenarios:**
+- Testing well log analysis → Generate LAS files with realistic GR, RHOB, NPHI, RT curves
+- Testing seismic interpretation → Generate SEG-Y volumes with proper geometry
+- Testing production monitoring → Generate time-series SCADA data
+- OSDU integration testing → Generate data with OSDU-compliant manifests
+- Demo/training environments → Generate diverse datasets representing different formations
+
+The synthetic data skill ensures physically realistic relationships (e.g., Archie equation, density-porosity correlations) and validates against industry libraries (lasio, segyio, dlisio).
+
 **Documentation:**
 
-- Write the validated design (spec) to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
+- Write the validated design (spec) to `docs/petropowers/specs/YYYY-MM-DD-<topic>-design.md`
   - (User preferences for spec location override this default)
 - Use elements-of-style:writing-clearly-and-concisely skill if available
 - Commit the design document to git
@@ -134,6 +184,32 @@ Wait for the user's response. If they request changes, make them and re-run the 
 
 - Invoke the writing-plans skill to create a detailed implementation plan
 - Do NOT invoke any other skill. writing-plans is the next step.
+
+## Example: Oil & Gas Project Brainstorming
+
+**User:** "I want to build a well log analysis tool"
+
+**Agent workflow:**
+
+1. **Explore context:** Check for existing well log code, data files
+2. **Ask domain questions (one at a time):**
+   - "What's the primary use case? (A) Formation evaluation (B) Quality control (C) Well correlation (D) Integration with reservoir models"
+   - "Which log curves will you analyze? (A) Basic suite (GR, RHOB, NPHI) (B) Full petrophysical (add RT, DT) (C) Advanced (add spectral, imaging)"
+   - "Will you need test data? I can generate synthetic LAS files with realistic petrophysical relationships for testing."
+   - "Should the output be OSDU-compliant for integration with E&P platforms?"
+3. **Propose approaches:**
+   - Option A: Python CLI tool with lasio + numpy/pandas (recommended for flexibility)
+   - Option B: Web dashboard with visualization (better for non-technical users)
+   - Option C: Jupyter notebook workflow (best for exploratory analysis)
+4. **Present design:** Architecture, data flow, calculations, testing approach
+5. **Write spec:** Include synthetic data generation requirements
+6. **Transition to planning:** Invoke writing-plans skill
+
+**Key outcome:** The spec includes:
+- Data format requirements (LAS 2.0/3.0)
+- Test data plan (generate 10 LAS files: 5 sandstone, 3 shale, 2 carbonate)
+- Physical constraints (Archie equation for Sw calculation)
+- Validation approach (compare against lasio library)
 
 ## Key Principles
 

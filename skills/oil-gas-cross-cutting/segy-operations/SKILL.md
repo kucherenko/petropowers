@@ -193,9 +193,9 @@ with segyio.open('file.sgy', 'r') as segyfile:
 ## Software Tasks
 
 If user requests:
-- Seismic visualization web app → invoke `superpowers:oil-gas-delegation`
-- SEG-Y database system → invoke `superpowers:oil-gas-delegation`
-- Automated SEG-Y processing pipeline → invoke `superpowers:oil-gas-delegation`
+- Seismic visualization web app → invoke `petropowers:oil-gas-delegation`
+- SEG-Y database system → invoke `petropowers:oil-gas-delegation`
+- Automated SEG-Y processing pipeline → invoke `petropowers:oil-gas-delegation`
 
 ## Quick Reference
 
@@ -355,6 +355,6 @@ manifest = create_seismic_manifest(
 ### Software Tasks
 
 If user requests:
-- OSDU data ingestion pipeline → invoke `superpowers:oil-gas-delegation`
-- Seismic visualization web app → invoke `superpowers:oil-gas-delegation`
+- OSDU data ingestion pipeline → invoke `petropowers:oil-gas-delegation`
+- Seismic visualization web app → invoke `petropowers:oil-gas-delegation`
 - OSDU schema validation → stay in domain skill (validate against OSDU schemas)

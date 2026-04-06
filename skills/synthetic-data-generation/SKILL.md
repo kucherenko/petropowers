@@ -105,7 +105,7 @@ User says:
 ## Software Tasks
 
 If user requests:
-- Full OSDU ingestion pipeline → invoke `superpowers:oil-gas-delegation`
+- Full OSDU ingestion pipeline → invoke `petropowers:oil-gas-delegation`
 - Real-time data generation → Explain this is batch-only
 - Proprietary format support → Explain only open standards (LAS, SEG-Y, DLIS) supported
 

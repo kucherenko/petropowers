@@ -285,9 +285,9 @@ df = df.replace(null_value, np.nan)
 ## Software Tasks
 
 If user requests:
-- Well log database → invoke `superpowers:oil-gas-delegation`
-- Automated log interpretation tool → invoke `superpowers:oil-gas-delegation`
-- Log visualization web app → invoke `superpowers:oil-gas-delegation`
+- Well log database → invoke `petropowers:oil-gas-delegation`
+- Automated log interpretation tool → invoke `petropowers:oil-gas-delegation`
+- Log visualization web app → invoke `petropowers:oil-gas-delegation`
 
 ## Quick Reference
 
@@ -484,6 +484,6 @@ manifest = las_to_osdu_welllog(
 ### Software Tasks
 
 If user requests:
-- OSDU ingestion pipeline → invoke `superpowers:oil-gas-delegation`
-- Well log visualization app → invoke `superpowers:oil-gas-delegation`
+- OSDU ingestion pipeline → invoke `petropowers:oil-gas-delegation`
+- Well log visualization app → invoke `petropowers:oil-gas-delegation`
 - LAS to OSDU conversion script → stay in domain skill (conversion logic)
