@@ -14,6 +14,10 @@ Invoke this skill when the user request contains ANY of:
 - Oil & gas domain terms (reservoir, well, seismic, production, drilling, LAS, SEG-Y, WITSML, pipeline)
 - Missing critical details (no size, format, location, constraints specified)
 
+## Skill Type: Rigid
+
+This is a gatekeeper skill. Follow the decision logic exactly. Do not rationalize around it.
+
 ## Trigger Detection
 
 ### Keywords Table
@@ -75,6 +79,15 @@ These requests do NOT require brainstorming:
 - Follow-up to existing brainstorming session (design already approved)
 - Bug fixes with clear reproduction steps
 - Code review responses
+
+## Red Flags - You're Rationalizing
+
+| Thought | Reality |
+|---------|---------|
+| "This is too simple to brainstorm" | Simple requests often hide complexity. Run the check. |
+| "I already know what they want" | That's an assumption. Run the check. |
+| "I'll save time by skipping this" | Brainstorming catches scope issues early. Run the check. |
+| "The user said it's urgent" | Urgency doesn't change the need for clarity. Run the check. |
 
 ## Examples
 
