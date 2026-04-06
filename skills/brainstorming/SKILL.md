@@ -160,6 +160,7 @@ If the project requires test data for oil & gas workflows:
 - Testing production monitoring → Generate time-series SCADA data
 - OSDU integration testing → Generate data with OSDU-compliant manifests
 - Demo/training environments → Generate diverse datasets representing different formations
+- Testing core analysis workflows → Generate core photos with specific lithology and features (EXPENSIVE - confirm count first)
 
 The synthetic data skill ensures physically realistic relationships (e.g., Archie equation, density-porosity correlations) and validates against industry libraries (lasio, segyio, dlisio).
 
