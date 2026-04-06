@@ -11,6 +11,18 @@
           }
         ]
       }
+    ],
+    "PostResponse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/audit-brainstorming/audit.sh\"",
+            "async": true
+          }
+        ]
+      }
     ]
   }
 }
