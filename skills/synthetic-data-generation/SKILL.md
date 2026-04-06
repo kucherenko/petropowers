@@ -1,3 +1,8 @@
+---
+name: synthetic-data-generation
+description: "Generate realistic synthetic oil & gas data (LAS well logs, SEG-Y seismic, time-series) with proper physical constraints for testing, demos, and training."
+---
+
 # Synthetic Data Generator
 
 Natural language interface for generating realistic oil & gas domain data.
