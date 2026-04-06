@@ -82,7 +82,8 @@ digraph brainstorming {
 When working on oil & gas projects, consider these domain-specific questions:
 
 - **Data Requirements:**
-  - "Will this need test data? If so, should I generate synthetic well logs, seismic data, or production data for testing?"
+  - "Will this need test data? If so, should I generate synthetic well logs, seismic data, core photos, or production data for testing?"
+  - "Note: Core photo generation uses AI image generation and is expensive - always confirm count and aspects before generating"
   - "What data formats will you work with? (LAS, SEG-Y, WITSML, PRODML, DLIS)"
   - "Do you need OSDU-compliant data structures?"
   
