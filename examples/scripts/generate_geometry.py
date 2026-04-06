@@ -37,7 +37,7 @@ def _cluster_points(rng: random.Random) -> list[tuple[float, float]]:
     points: list[tuple[float, float]] = []
     for (cx, cy), size in zip(centres, cluster_sizes):
         for _ in range(size):
-            # spacing 500–800 m with gaussian scatter
+            # Gaussian scatter, σ≈700 m around cluster centre
             x = cx + rng.gauss(0, 700)
             y = cy + rng.gauss(0, 600)
             x = max(500.0, min(EXTENT_X - 500.0, x))
@@ -82,8 +82,8 @@ def main() -> None:
     wells_path = OUT_DIR / "wells.json"
     boundary_path = OUT_DIR / "boundary.json"
 
-    wells_path.write_text(json.dumps(wells, indent=2))
-    boundary_path.write_text(json.dumps(boundary, indent=2))
+    wells_path.write_text(json.dumps(wells, indent=2) + "\n")
+    boundary_path.write_text(json.dumps(boundary, indent=2) + "\n")
 
     print(f"Wrote {len(wells)} wells  → {wells_path}")
     print(f"Wrote {len(boundary)} boundary vertices → {boundary_path}")
