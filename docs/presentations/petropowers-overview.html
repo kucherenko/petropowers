@@ -387,6 +387,68 @@
             border-radius: 4px;
             color: var(--energy-orange);
         }
+
+        .reveal .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .reveal .example-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: left;
+            border: 1px solid var(--steel-gray);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .reveal .example-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--energy-orange);
+        }
+
+        .reveal .example-card .card-icon {
+            font-size: 2em;
+            margin-bottom: 12px;
+        }
+
+        .reveal .example-card h4 {
+            color: var(--energy-orange);
+            font-size: 0.9em;
+            margin: 0 0 10px 0;
+        }
+
+        .reveal .example-card p {
+            color: var(--muted-text);
+            font-size: 0.65em;
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+        }
+
+        .reveal .example-card .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .reveal .example-card .tech-tag {
+            background: rgba(44, 82, 130, 0.5);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.55em;
+            color: var(--light-text);
+        }
+
+        .reveal .example-card .file-path {
+            font-family: monospace;
+            font-size: 0.6em;
+            color: var(--steel-gray);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--steel-gray);
+        }
     </style>
 </head>
 <body>
@@ -621,7 +683,57 @@
                 </div>
             </section>
 
-            <!-- Slide 7: Results & Next Steps -->
+            <!-- Slide 7: Examples -->
+            <section>
+                <h2>Working Examples</h2>
+                <p>Built with PetroPowers Workflow</p>
+
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="card-icon">📊</div>
+                        <h4>Dataset Generator</h4>
+                        <p>Complete synthetic oil field with 50 wells: logs, seismic, production, trajectories, core photos, OSDU manifests</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">lasio</span>
+                            <span class="tech-tag">segyio</span>
+                            <span class="tech-tag">numpy</span>
+                        </div>
+                        <div class="file-path">examples/generate_reservoir_dataset.py</div>
+                    </div>
+
+                    <div class="example-card">
+                        <div class="card-icon">🔌</div>
+                        <h4>Data API Service</h4>
+                        <p>FastAPI service for browsing and downloading synthetic datasets. Catalogue endpoints, file serving, optional auth.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">REST</span>
+                        </div>
+                        <div class="file-path">examples/api/</div>
+                    </div>
+
+                    <div class="example-card">
+                        <div class="card-icon">🖥️</div>
+                        <h4>Reservoir Webapp</h4>
+                        <p>Interactive web application for reservoir data visualization and exploration.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Svelte</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Tailwind</span>
+                            <span class="tech-tag">Vite</span>
+                        </div>
+                        <div class="file-path">examples/webapp/</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 25px;">
+                    <strong>All examples built autonomously</strong> using the PetroPowers workflow: brainstorming → planning → TDD → subagent execution → review
+                </div>
+            </section>
+
+            <!-- Slide 8: Results & Next Steps -->
             <section>
                 <h2>Results & Next Steps</h2>
                 <p>Research Outcomes & Path Forward</p>
