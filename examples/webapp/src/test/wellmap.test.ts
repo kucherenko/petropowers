@@ -67,6 +67,10 @@ describe('interpolatePressure', () => {
     expect(result).toBeLessThan(1500)
     expect(result).toBeGreaterThan(1000)
   })
+  it('returns 0 when wells array is empty', async () => {
+    const { interpolatePressure } = await import('../lib/wellmap')
+    expect(interpolatePressure(500, 500, [])).toBe(0)
+  })
 })
 
 describe('pressureQuartileColor', () => {
