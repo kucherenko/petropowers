@@ -310,3 +310,48 @@ def test_auth_on_download_with_key_succeeds(auth_client):
         headers={"X-API-Key": "test-secret"},
     )
     assert r.status_code == 200
+
+
+# ---------------------------------------------------------------------------
+# Images
+# ---------------------------------------------------------------------------
+
+def test_image_endpoint_returns_inline_png(client):
+    """PNG served via /images/ has correct content-type and no Content-Disposition."""
+    r = client.get("/images/ppr-1/core_photos/PPR1-Well-001/photo_001.png")
+    assert r.status_code == 200
+    assert r.headers["content-type"].startswith("image/png")
+    assert "content-disposition" not in r.headers
+
+
+def test_image_endpoint_non_image_returns_415(client):
+    """Requesting a non-image file via /images/ returns 415."""
+    r = client.get("/images/ppr-1/well_logs/PPR1-Well-001.las")
+    assert r.status_code == 415
+
+
+def test_image_endpoint_file_not_found(client):
+    """Missing image returns 404."""
+    r = client.get("/images/ppr-1/core_photos/PPR1-Well-001/missing.png")
+    assert r.status_code == 404
+
+
+def test_image_endpoint_reservoir_not_found(client):
+    """Unknown reservoir on /images/ returns 404."""
+    r = client.get("/images/ghost/core_photos/PPR1-Well-001/photo_001.png")
+    assert r.status_code == 404
+
+
+def test_image_auth_enforced(auth_client):
+    """Auth applies to /images/ endpoint when API_KEY is set."""
+    r = auth_client.get("/images/ppr-1/core_photos/PPR1-Well-001/photo_001.png")
+    assert r.status_code == 401
+
+
+def test_image_auth_with_correct_key_succeeds(auth_client):
+    """Correct key allows access to /images/ endpoint."""
+    r = auth_client.get(
+        "/images/ppr-1/core_photos/PPR1-Well-001/photo_001.png",
+        headers={"X-API-Key": "test-secret"},
+    )
+    assert r.status_code == 200

@@ -3,7 +3,7 @@ from typing import Optional
 
 from fastapi import Header, HTTPException
 
-from examples.api import config
+from . import config
 
 
 def verify_api_key(x_api_key: Optional[str] = Header(default=None)) -> None:
