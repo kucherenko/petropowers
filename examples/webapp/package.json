@@ -1,0 +1,38 @@
+{
+  "name": "reservoir-webapp",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-svelte": "^0.460.0",
+    "papaparse": "^5.4.1",
+    "svelte": "^5.1.0",
+    "svelte-routing": "^2.13.0",
+    "tailwind-merge": "^2.5.4",
+    "three": "^0.169.0",
+    "uplot": "^1.6.31"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/svelte": "^5.2.4",
+    "@types/papaparse": "^5.3.15",
+    "@types/three": "^0.169.0",
+    "autoprefixer": "^10.4.20",
+    "jsdom": "^25.0.1",
+    "postcss": "^8.4.47",
+    "svelte-check": "^4.0.0",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.4"
+  }
+}
