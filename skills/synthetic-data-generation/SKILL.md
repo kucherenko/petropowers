@@ -9,7 +9,7 @@ Natural language interface for generating realistic oil & gas domain data.
 
 ## Purpose
 
-Generate synthetic well logs (LAS/DLIS), seismic (SEG-Y), and time-series data with proper physical constraints for testing, demos, and training.
+Generate synthetic well logs (LAS/DLIS), seismic (SEG-Y), core photos, and time-series data with proper physical constraints for testing, demos, and training.
 
 ## Capabilities
 
@@ -17,6 +17,7 @@ Generate data with realistic relationships:
 - Well logs (GR, RHOB, NPHI, RT, DT) with Archie equation constraints
 - Seismic volumes with proper geometry
 - OSDU-compliant metadata
+- Core photos using AI image generation (requires API key, expensive operation)
 
 ## Invoking
 
