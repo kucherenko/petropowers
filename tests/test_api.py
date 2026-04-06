@@ -267,3 +267,46 @@ def test_download_encoded_traversal_rejected(client):
     # Our bounds check should reject this with 400 or 404.
     r = client.get("/reservoirs/..%2Fetc/passwd/token.txt")
     assert r.status_code in (400, 404)
+
+
+# ---------------------------------------------------------------------------
+# Auth
+# ---------------------------------------------------------------------------
+
+def test_auth_off_no_header_succeeds(client):
+    """When API_KEY is unset, requests without X-API-Key succeed."""
+    r = client.get("/health")
+    assert r.status_code == 200
+
+
+def test_auth_on_no_header_returns_401(auth_client):
+    """When API_KEY is set, requests without X-API-Key return 401."""
+    r = auth_client.get("/health")
+    assert r.status_code == 401
+
+
+def test_auth_on_wrong_key_returns_401(auth_client):
+    """Wrong X-API-Key value returns 401."""
+    r = auth_client.get("/health", headers={"X-API-Key": "wrong-key"})
+    assert r.status_code == 401
+
+
+def test_auth_on_correct_key_succeeds(auth_client):
+    """Correct X-API-Key header allows access."""
+    r = auth_client.get("/health", headers={"X-API-Key": "test-secret"})
+    assert r.status_code == 200
+
+
+def test_auth_on_download_enforced(auth_client):
+    """Auth applies to download endpoint too."""
+    r = auth_client.get("/reservoirs/ppr-1/well_logs/PPR1-Well-001.las")
+    assert r.status_code == 401
+
+
+def test_auth_on_download_with_key_succeeds(auth_client):
+    """Download with correct key succeeds."""
+    r = auth_client.get(
+        "/reservoirs/ppr-1/well_logs/PPR1-Well-001.las",
+        headers={"X-API-Key": "test-secret"},
+    )
+    assert r.status_code == 200
