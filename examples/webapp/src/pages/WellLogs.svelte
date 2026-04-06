@@ -4,7 +4,7 @@
   import { parseLas } from '../lib/las'
   import type { LasData } from '../lib/las'
   import NavBar from '../components/NavBar.svelte'
-  import WellLogChart from '../components/WellLogChart.svelte'
+  import WellLogPanel from '../components/WellLogPanel.svelte'
   import Alert from '../components/ui/Alert.svelte'
   import Spinner from '../components/ui/Spinner.svelte'
 
@@ -67,7 +67,7 @@
   {:else if loading}
     <div class="flex justify-center py-12"><Spinner class="h-8 w-8" /></div>
   {:else if lasData}
-    <WellLogChart data={lasData} />
+    <WellLogPanel data={lasData} />
 
     {#if wellPhotos.length}
       <h2 class="text-lg font-semibold mt-6 mb-2">Core Photos</h2>
