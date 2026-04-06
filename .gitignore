@@ -12,3 +12,6 @@ __pycache__/
 *$py.class
 *.so
 .Python
+
+# Generated example data
+examples/data/
