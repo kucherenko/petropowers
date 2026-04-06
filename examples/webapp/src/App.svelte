@@ -22,9 +22,8 @@
 </script>
 
 <Router>
-  <!-- svelte-ignore -->
-  <Route path="/login" component={Login as any} />
-  <Route path="/" component={ReservoirList as any} />
+  <Route path="/login"><Login /></Route>
+  <Route path="/"><ReservoirList /></Route>
   <Route path="/reservoirs/:name" let:params>
     <ReservoirOverview name={params.name} />
   </Route>
