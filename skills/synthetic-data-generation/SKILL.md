@@ -64,6 +64,61 @@ segy_path = generator.create_record(
 )
 ```
 
+## Core Photo Generation
+
+**IMPORTANT: Expensive Operation**
+
+Core photo generation uses AI image generation APIs which are costly. Before generating:
+1. **Always ask for count** - Never generate without explicit number confirmation
+2. **Ask about aspects** based on detail level needed
+
+### Mandatory Questions
+
+When user requests core photos, ask these in order:
+
+**Question 1 - Count:**
+> "How many core photos do you need? (Image generation is expensive - each photo costs API credits)"
+
+**Question 2 - Lithology:**
+> "What lithology? (A) Sandstone (B) Shale (C) Carbonate (D) Limestone (E) Dolomite (F) Mixed/varies"
+
+**Question 3 - Visual Features (if user wants detail):**
+> "Any specific visual features? (A) Default/random (B) With fractures (C) With oil staining (D) Specific bedding angles (E) Let me specify"
+
+**Question 4 - Full Context (if user wants geological accuracy):**
+> "Need full geological context? If yes, specify: depth range, formation name, field name, well naming convention"
+
+### Usage
+
+```python
+from synthetic_data.core_photos import CorePhotoGenerator
+
+generator = CorePhotoGenerator(api_key="YOUR_GOOGLE_AI_API_KEY")
+result = generator.create_record(
+    well_name="Test-Well-001",
+    lithology="sandstone",
+    depth_range=(1000.0, 2000.0),
+    output_dir="./output"
+)
+```
+
+Options:
+- `well_name`: Well identifier
+- `lithology`: sandstone | shale | carbonate | limestone | dolomite
+- `depth_range`: (start, end) in meters
+- `core_length`: Length of core sample in meters (default: 1.0)
+- `field_name`: Field name for metadata
+- `formation`: Formation name for metadata
+- `output_dir`: Directory to save images and metadata
+
+### Example Assets
+
+Reference examples available at `synthetic_data/assets/`:
+- `core-photos.png` - Real core sample photographs showing proper format
+- `core-photos.webp` - WebP version
+
+These show proper format: depth markers, well identification, lithology variations, and scale bars.
+
 ## Validation
 
 Files validate against domain libraries:
