@@ -1,8 +1,81 @@
-# Synthetic Data API
+# Synthetic Oil & Gas Examples
+
+This directory contains two things:
+
+1. **`generate_reservoir_dataset.py`** — a script that uses the petropowers `synthetic_data` framework to generate a complete synthetic oil field dataset
+2. **`api/`** — a read-only FastAPI service for browsing and downloading the generated data
+
+---
+
+## Generating the dataset
+
+The generation script demonstrates all major generators in the `synthetic_data` package. It produces ~50-well datasets covering well logs, seismic, production history, well paths, core photos, and OSDU manifests.
+
+### Install generation dependencies
+
+```bash
+pip install lasio segyio numpy pandas
+```
+
+### Run
+
+```bash
+# From the repo root — generates data/ppr-1/
+python examples/generate_reservoir_dataset.py
+
+# Specify a different reservoir name
+python examples/generate_reservoir_dataset.py --reservoir ppr-2
+
+# Fix the random seed for reproducible output
+python examples/generate_reservoir_dataset.py --reservoir ppr-1 --seed 42
+```
+
+Output is written to `examples/data/{reservoir}/` (gitignored).
+
+### Core photos (optional)
+
+Core photo generation requires a Google Gemini API key. Without it the step is skipped automatically with a warning.
+
+```bash
+GOOGLE_AI_API_KEY=your-key python examples/generate_reservoir_dataset.py
+```
+
+### Generated data layout
+
+```
+examples/data/
+└── ppr-1/
+    ├── well_logs/                        # 50 LAS files (PPR1-Well-001.las … PPR1-Well-050.las)
+    ├── seismic/                          # 1 SEG-Y volume (ppr-1_3d_survey.segy)
+    ├── production/                       # 50 CSV files (730-day production history per well)
+    ├── well_paths/                       # 50 JSON files (S-curve deviated trajectories)
+    ├── core_photos/
+    │   ├── PPR1-Well-001/                # Up to 5 PNG photos
+    │   └── PPR1-Well-002/                # Up to 5 PNG photos
+    └── osdu_manifests/
+        ├── well_log/                     # OSDU WellLog + Well + Wellbore manifests
+        ├── seismic/                      # OSDU SeismicTraceData manifest
+        └── production/                   # OSDU Facility (production) manifests
+```
+
+### Dataset specifications
+
+| Data type | Count | Format | Key parameters |
+|-----------|-------|--------|----------------|
+| Well logs | 50 | LAS | 1500–3500 m depth, 0.15 m interval, curves: GR RHOB NPHI RT DT |
+| Seismic | 1 | SEG-Y | 50×50 inlines/crosslines, 0–1000 ms @ 4 ms |
+| Production | 50 | CSV | 2 years daily (730 samples), oil/gas/water rates + pressure + temperature |
+| Well paths | 50 | JSON | S-curve deviated trajectories (MD, TVD, inclination, azimuth) |
+| Core photos | ≤10 | PNG | 2 wells × up to 5 photos, 2000–2500 m, sandstone with oil staining |
+| OSDU manifests | 151 | JSON | Well, Wellbore, WellLog (×50), SeismicTraceData (×1), Facility (×50) |
+
+---
+
+## Synthetic Data API
 
 Read-only FastAPI service for browsing and downloading pre-generated synthetic oil & gas datasets from `examples/data/`.
 
-## Quick start
+### Quick start
 
 Install dependencies (once):
 
@@ -125,9 +198,9 @@ curl http://localhost:8000/images/ppr-1/core_photos/PPR1-Well-001/photo_001.png
 | `well_logs` | LAS | Well log curves |
 | `production` | CSV | Time-series production data |
 | `seismic` | SEG-Y | 3-D seismic volumes |
+| `well_paths` | JSON | Deviated well path trajectories (MD, TVD, inclination, azimuth) |
 | `core_photos` | PNG/JPEG | Core sample photos (nested by well) |
 | `osdu_manifests` | JSON | OSDU-format metadata manifests |
-| `trajectories` | CSV | Well path trajectories |
 
 ## Data directory layout
 
@@ -137,22 +210,27 @@ examples/data/
     ├── well_logs/
     │   └── {well}.las
     ├── production/
-    │   └── {well}.csv
+    │   └── {well}_production.csv
     ├── seismic/
-    │   └── {survey}.segy
+    │   └── {reservoir}_3d_survey.segy
+    ├── well_paths/
+    │   └── {well}_path.json
     ├── core_photos/
     │   └── {well}/
-    │       └── photo_{n}.png
-    ├── osdu_manifests/
-    │   └── {type}/
-    │       └── {well}.json
-    └── trajectories/
-        └── {well}.csv
+    │       └── depth_{XXXX}.png
+    └── osdu_manifests/
+        ├── well_log/
+        │   └── {well}.json
+        ├── seismic/
+        │   └── {survey}.json
+        └── production/
+            └── {well}.json
 ```
 
 Generate sample data with:
 
 ```bash
-cd examples
-python -m data.generate   # or follow the generation scripts in examples/data/
+python examples/generate_reservoir_dataset.py
+# or with a fixed seed
+python examples/generate_reservoir_dataset.py --seed 42
 ```
