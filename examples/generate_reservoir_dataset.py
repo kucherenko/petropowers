@@ -12,7 +12,6 @@ generating all major data types for a synthetic oil field.
 import argparse
 import json
 import os
-import sys
 from pathlib import Path
 from typing import Dict, List
 
@@ -52,7 +51,7 @@ SEISMIC_N_SAMPLES = 251  # 0–1000 ms @ 4 ms
 SEISMIC_SAMPLE_INTERVAL_US = 4000  # 4 ms in microseconds
 
 N_PRODUCTION_DAYS = 730  # 2 years
-CORE_PHOTO_WELLS = ["PPR1-Well-001", "PPR1-Well-002"]
+CORE_PHOTO_WELLS = [f"{WELL_PREFIX}-001", f"{WELL_PREFIX}-002"]
 CORE_PHOTOS_PER_WELL = 5
 CORE_PHOTO_DEPTH_RANGE = (2000.0, 2500.0)
 
@@ -259,8 +258,7 @@ def generate_osdu_manifests(
     for las_path in las_paths:
         try:
             manifest = las_mapper.to_manifest(las_path, LEGAL_TAGS)
-            well_name = manifest["data"]["WorkProduct"]["data"]["WellboreID"]
-            safe_name = well_name.replace(":", "_").replace("/", "_")
+            safe_name = Path(las_path).stem
             out_path = os.path.join(well_log_dir, f"{safe_name}.json")
             with open(out_path, "w") as f:
                 json.dump(manifest, f, indent=2)
@@ -353,9 +351,9 @@ def main() -> None:
     las_paths = generate_well_logs(dirs["well_logs"], names, seed)
     segy_path = generate_seismic(dirs["seismic"], reservoir, seed)
     scada_paths = generate_production(dirs["production"], names, seed)
-    _path_well_paths = generate_well_paths(dirs["well_paths"], names, seed)
-    _photo_paths = generate_core_photos(dirs["core_photos"], seed)
-    _manifest_paths = generate_osdu_manifests(
+    well_path_paths = generate_well_paths(dirs["well_paths"], names, seed)
+    photo_paths = generate_core_photos(dirs["core_photos"], seed)
+    manifest_paths = generate_osdu_manifests(
         dirs["osdu_manifests"], las_paths, segy_path, scada_paths
     )
 
@@ -364,9 +362,9 @@ def main() -> None:
     print(f"  Well logs     : {len(las_paths)}")
     print(f"  Seismic       : {'1' if segy_path else '0'}")
     print(f"  Production    : {len(scada_paths)}")
-    print(f"  Well paths    : {len(_path_well_paths)}")
-    print(f"  Core photos   : {len(_photo_paths)}")
-    print(f"  OSDU manifests: {len(_manifest_paths)}")
+    print(f"  Well paths    : {len(well_path_paths)}")
+    print(f"  Core photos   : {len(photo_paths)}")
+    print(f"  OSDU manifests: {len(manifest_paths)}")
     print(f"{'='*60}\n")
 
 
