@@ -10,6 +10,7 @@
   import Production from './pages/Production.svelte'
   import CorePhotos from './pages/CorePhotos.svelte'
   import OsduManifests from './pages/OsduManifests.svelte'
+  import WellMap from './pages/WellMap.svelte'
 
   // Auth guard: redirect to /login if no key and not already there
   $effect(() => {
@@ -30,6 +31,9 @@
   </Route>
   <Route path="/reservoirs/:name/production" let:params>
     <Production name={params.name} />
+  </Route>
+  <Route path="/reservoirs/:name/well_map" let:params>
+    <WellMap name={params.name} />
   </Route>
   <Route path="/reservoirs/:name/core_photos" let:params>
     <CorePhotos name={params.name} />
