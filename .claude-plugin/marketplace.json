@@ -1,19 +1,19 @@
 {
-  "name": "superpowers-dev",
-  "description": "Development marketplace for Superpowers core skills library",
+  "name": "petropowers-dev",
+  "description": "Development marketplace for PetroPowers core skills library",
   "owner": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Andrii Kucherenko",
+    "email": "kucherenko.andrey@gmail.com"
   },
   "plugins": [
     {
-      "name": "superpowers",
+      "name": "petropowers",
       "description": "Core skills library for Claude Code: TDD, debugging, collaboration patterns, and proven techniques",
       "version": "5.0.7",
       "source": "./",
       "author": {
-        "name": "Jesse Vincent",
-        "email": "jesse@fsck.com"
+        "name": "Andrii Kucherenko",
+        "email": "kucherenko.andrey@gmail.com"
       }
     }
   ]

@@ -1,6 +1,6 @@
 # PetroPowers
 
-AI skills framework for petroleum engineering workflows, built on Superpowers foundation. Specialized domain expertise for oil & gas operations.
+AI skills framework for petroleum engineering workflows. Specialized domain expertise for oil & gas operations.
 
 PetroPowers combines proven software development workflows with deep oil & gas domain knowledge, enabling coding agents to understand industry terminology, work with professional data formats, and follow domain-specific best practices.
 
@@ -8,7 +8,7 @@ PetroPowers combines proven software development workflows with deep oil & gas d
 
 PetroPowers combines proven software development workflows with deep domain expertise:
 
-- **General engineering skills** - TDD, debugging, planning, code review (Superpowers foundation)
+- **General engineering skills** - TDD, debugging, planning, code review
 - **Oil & gas domain skills** - Exploration, drilling, reservoir, midstream, refining workflows
 - **Intelligent delegation** - Domain tasks stay in domain skills; software tasks route to development workflows
 
@@ -47,16 +47,12 @@ When you ask "Build a drilling monitoring dashboard," PetroPowers:
 
 PetroPowers is maintained by [Andrii Kucherenko](https://github.com/kucherenko).
 
-Built on [Superpowers](https://github.com/obra/superpowers) by Jesse Vincent and Prime Radiant.
 
-### Acknowledgments
-
-PetroPowers extends Superpowers with petroleum engineering domain expertise. The general development workflow skills (TDD, debugging, planning, collaboration) are from the upstream Superpowers project.
 
 
 ## Installation
 
-PetroPowers includes all Superpowers general skills plus oil & gas domain specialization.
+PetroPowers includes general development skills plus oil & gas domain specialization.
 
 ### Prerequisites
 
@@ -158,7 +154,7 @@ Specialized workflows for petroleum engineering operations:
 
 See [docs/oil-gas-pipelines.md](docs/oil-gas-pipelines.md) for detailed pipeline documentation.
 
-### Development Skills (Superpowers Foundation)
+### Development Skills
 
 Workflows for software engineering best practices:
 
@@ -182,7 +178,7 @@ Workflows for software engineering best practices:
 
 **Meta**
 - **writing-skills** - Create new skills following best practices (includes testing methodology)
-- **using-superpowers** - Introduction to the skills system
+- **using-petropowers** - Introduction to the skills system
 
 ### Oil & Gas Domain Pipelines
 
@@ -232,7 +228,7 @@ graph TB
 
 - **Refining** - Process operations, crude blending, product quality. Converts raw hydrocarbons into marketable products.
 
-**How it integrates:** When domain work requires building software (dashboards, APIs, analysis tools), a delegation skill automatically routes to Superpowers development workflows (brainstorming, test-driven-development, writing-plans). After software is built, control returns to domain skills for continued engineering work.
+**How it integrates:** When domain work requires building software (dashboards, APIs, analysis tools), a delegation skill automatically routes to development workflows (brainstorming, test-driven-development, writing-plans). After software is built, control returns to domain skills for continued engineering work.
 
 **Detailed docs:** [docs/oil-gas-pipelines.md](docs/oil-gas-pipelines.md)
 
@@ -278,7 +274,7 @@ See `skills/writing-skills/SKILL.md` for the complete guide.
 
 ### Development Skills Contributions
 
-Development skills (TDD, debugging, planning) follow upstream Superpowers contribution guidelines.
+Development skills (TDD, debugging, planning) follow the same contribution guidelines as domain skills.
 
 ## Updating
 
@@ -291,12 +287,6 @@ Skills update automatically when you update the plugin:
 ## License
 
 MIT License - see LICENSE file for details
-
-### Attribution
-
-PetroPowers is built on Superpowers by Jesse Vincent. The original Superpowers project is available at https://github.com/obra/superpowers.
-
-General development workflow skills (TDD, debugging, planning, collaboration) are from the upstream Superpowers project, maintained by Jesse Vincent and Prime Radiant.
 
 ## Quick Reference
 
@@ -336,10 +326,4 @@ General development workflow skills (TDD, debugging, planning, collaboration) ar
 - **Issues**: https://github.com/kucherenko/petropowers/issues
 - **Maintainer**: [Andrii Kucherenko](https://github.com/kucherenko)
 
-### Upstream Community (Superpowers)
 
-For general development workflow skills:
-
-- **Discord**: [Join us](https://discord.gg/Jd8Vphy9jq) for community support, questions about general skills
-- **Issues**: https://github.com/obra/superpowers/issues
-- **Release announcements**: [Sign up](https://primeradiant.com/superpowers/) to get notified about new versions

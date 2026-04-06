@@ -5,7 +5,7 @@ setup(
     name="synthetic_data",
     version="0.1.0",
     description="Synthetic data generation for oil & gas domain",
-    author="Superpowers",
+    author="PetroPowers",
     packages=find_packages(),
     install_requires=[
         "lasio>=0.31",

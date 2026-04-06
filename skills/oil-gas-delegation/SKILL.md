@@ -31,7 +31,7 @@ Does request require building software?
   ↓
   YES → Invoke oil-gas-delegation
         ↓
-        Route to appropriate superpowers workflow
+        Route to appropriate petropowers workflow
   ↓
   NO → Handle within domain skill
 ```
