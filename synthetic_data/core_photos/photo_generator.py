@@ -1,4 +1,4 @@
-"""Core photo generator using Google Gemini API for image generation."""
+"""Core photo generator using Google Imagen API for image generation."""
 import os
 import json
 import tempfile
@@ -81,7 +81,7 @@ class CorePhotoMetadata:
 
 
 class CorePhotoGenerator(Generator):
-    """Generate synthetic core photos using Google Gemini API.
+    """Generate synthetic core photos using Google Imagen API.
     
     Creates realistic vertical core sample images with:
     - Proper geological features
@@ -107,15 +107,16 @@ class CorePhotoGenerator(Generator):
         self.seed = seed
         self.rng = np.random.default_rng(seed)
         
-        # Lazy import to avoid requiring google-generativeai if not using this module
+        # Lazy import to avoid requiring google-genai if not using this module
         try:
-            import google.generativeai as genai
-            self.genai = genai
-            self.genai.configure(api_key=self.api_key)
+            from google import genai
+            from google.genai import types as genai_types
+            self.client = genai.Client(api_key=self.api_key)
+            self.genai_types = genai_types
         except ImportError:
             raise ImportError(
-                "google-generativeai package is required for core photo generation. "
-                "Install it with: pip install google-generativeai"
+                "google-genai package is required for core photo generation. "
+                "Install it with: pip install google-genai"
             )
     
     def _generate_metadata(
@@ -160,12 +161,12 @@ class CorePhotoGenerator(Generator):
         # Generate properties with realistic ranges
         porosity = self.rng.uniform(*lithology_props["porosity_range"])
         permeability = self.rng.uniform(*lithology_props["permeability_range"])
-        grain_size = self.rng.choice(lithology_props["grain_sizes"])
-        texture = self.rng.choice(lithology_props["textures"])
-        color = self.rng.choice(lithology_props["colors"])
-        fractures = self.rng.integers(0, lithology_props["max_fractures"])
-        bedding_angle = self.rng.uniform(0, 90)
-        oil_staining = self.rng.random() < lithology_props["oil_staining_prob"]
+        grain_size = str(self.rng.choice(lithology_props["grain_sizes"]))
+        texture = str(self.rng.choice(lithology_props["textures"]))
+        color = str(self.rng.choice(lithology_props["colors"]))
+        fractures = int(self.rng.integers(0, lithology_props["max_fractures"]))
+        bedding_angle = float(self.rng.uniform(0, 90))
+        oil_staining = bool(self.rng.random() < lithology_props["oil_staining_prob"])
         
         return {
             "depth_start": depth_start,
@@ -319,37 +320,28 @@ class CorePhotoGenerator(Generator):
             output_dir = tempfile.mkdtemp()
         os.makedirs(output_dir, exist_ok=True)
         
-        # Generate image using Gemini
+        # Generate image using Imagen
         prompt = self._create_image_prompt(metadata_dict)
         
         try:
-            # Use Gemini 2.0 Flash for image generation
-            model = self.genai.GenerativeModel("gemini-2.0-flash-exp")
-            
-            # Generate image
-            response = model.generate_content(
-                [prompt],
-                generation_config=self.genai.GenerationConfig(
-                    response_mime_type="image/png"
-                )
+            response = self.client.models.generate_images(
+                model="imagen-4.0-generate-001",
+                prompt=prompt,
+                config=self.genai_types.GenerateImagesConfig(
+                    number_of_images=1,
+                    output_mime_type="image/png",
+                ),
             )
             
-            # Save image
             image_filename = f"{well_name}_depth_{metadata_dict['depth_start']:.1f}m.png"
             image_path = os.path.join(output_dir, image_filename)
             
-            # Get the image data from response
-            if hasattr(response, 'parts') and len(response.parts) > 0:
-                image_data = response.parts[0].inline_data.data
-                with open(image_path, 'wb') as f:
-                    f.write(image_data)
-            else:
-                # Fallback: create a placeholder if generation fails
-                print(f"Warning: Image generation failed for {well_name}. Creating placeholder.")
-                self._create_placeholder_image(image_path)
+            image_bytes = response.generated_images[0].image.image_bytes
+            with open(image_path, "wb") as f:
+                f.write(image_bytes)
                 
         except Exception as e:
-            print(f"Error generating image with Gemini: {e}")
+            print(f"Error generating image with Imagen: {e}")
             print("Creating placeholder image instead.")
             image_filename = f"{well_name}_depth_{metadata_dict['depth_start']:.1f}m.png"
             image_path = os.path.join(output_dir, image_filename)
