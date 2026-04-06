@@ -23,7 +23,13 @@
   onMount(async () => {
     try {
       files = await listFiles(name, 'production')
-      if (files.length) selected = files[0]
+      const params = new URLSearchParams(window.location.search)
+      const wellParam = params.get('well')
+      if (wellParam && files.includes(wellParam)) {
+        selected = wellParam
+      } else if (files.length) {
+        selected = files[0]
+      }
     } catch (e: unknown) {
       pageError = e instanceof Error ? e.message : String(e)
     }
@@ -41,11 +47,11 @@
         const parsed = Papa.parse<Record<string, string>>(text, { header: true, skipEmptyLines: true })
         rows = parsed.data.map(r => ({
           date: new Date(r['date']).getTime() / 1000,
-          oil: +r['oil_rate_m3d'],
-          gas: +r['gas_rate_m3d'],
-          water: +r['water_rate_m3d'],
-          pressure: +r['wellhead_pressure_bar'],
-          temperature: +r['temperature_c'],
+          oil: +r['oil_rate_bbl_d'],
+          gas: +r['gas_rate_mscf_d'],
+          water: +r['water_rate_bbl_d'],
+          pressure: +r['wellhead_pressure_psi'],
+          temperature: +r['temperature_f'],
         }))
       })
       .catch(e => { pageError = e.message })
