@@ -18,8 +18,7 @@
   const DATA_TYPES: Array<{ key: string; label: string; color: string }> = [
     { key: 'well_logs',      label: 'Well Logs',      color: 'bg-blue-100 text-blue-800 hover:bg-blue-200' },
     { key: 'production',     label: 'Production',     color: 'bg-green-100 text-green-800 hover:bg-green-200' },
-    { key: 'well_paths',     label: 'Well Paths',     color: 'bg-orange-100 text-orange-800 hover:bg-orange-200' },
-    { key: 'seismic',        label: 'Seismic',        color: 'bg-red-100 text-red-800 hover:bg-red-200' },
+    { key: 'well_map',       label: 'Well Map',        color: 'bg-orange-100 text-orange-800 hover:bg-orange-200' },
     { key: 'core_photos',    label: 'Core Photos',    color: 'bg-purple-100 text-purple-800 hover:bg-purple-200' },
     { key: 'osdu_manifests', label: 'OSDU Manifests', color: 'bg-cyan-100 text-cyan-800 hover:bg-cyan-200' },
   ]
@@ -46,13 +45,13 @@
   {:else}
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
       {#each DATA_TYPES as dt}
-        {#if summary[dt.key] !== undefined}
+        {#if dt.key === 'well_map' || summary[dt.key] !== undefined}
           <button
             class="rounded-lg border p-5 text-left transition-colors cursor-pointer {dt.color}"
             onclick={() => navigate(`/reservoirs/${name}/${dt.key}`)}
           >
             <div class="text-sm font-medium mb-1">{dt.label}</div>
-            <div class="text-3xl font-bold">{summary[dt.key]}</div>
+            <div class="text-3xl font-bold">{dt.key === 'well_map' ? '50' : summary[dt.key]}</div>
           </button>
         {/if}
       {/each}

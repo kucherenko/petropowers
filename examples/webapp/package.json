@@ -17,7 +17,6 @@
     "svelte": "^5.1.0",
     "svelte-routing": "^2.13.0",
     "tailwind-merge": "^2.5.4",
-    "three": "^0.169.0",
     "uplot": "^1.6.31",
     "express": "^4.21.1",
     "http-proxy-middleware": "^3.0.3"
@@ -27,7 +26,6 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/svelte": "^5.2.4",
     "@types/papaparse": "^5.3.15",
-    "@types/three": "^0.169.0",
     "autoprefixer": "^10.4.20",
     "jsdom": "^25.0.1",
     "postcss": "^8.4.47",

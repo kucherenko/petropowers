@@ -8,8 +8,6 @@
   import ReservoirOverview from './pages/ReservoirOverview.svelte'
   import WellLogs from './pages/WellLogs.svelte'
   import Production from './pages/Production.svelte'
-  import WellPaths from './pages/WellPaths.svelte'
-  import Seismic from './pages/Seismic.svelte'
   import CorePhotos from './pages/CorePhotos.svelte'
   import OsduManifests from './pages/OsduManifests.svelte'
 
@@ -32,12 +30,6 @@
   </Route>
   <Route path="/reservoirs/:name/production" let:params>
     <Production name={params.name} />
-  </Route>
-  <Route path="/reservoirs/:name/well_paths" let:params>
-    <WellPaths name={params.name} />
-  </Route>
-  <Route path="/reservoirs/:name/seismic" let:params>
-    <Seismic name={params.name} />
   </Route>
   <Route path="/reservoirs/:name/core_photos" let:params>
     <CorePhotos name={params.name} />
