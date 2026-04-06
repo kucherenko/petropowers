@@ -13,19 +13,24 @@ export interface ApiError {
 }
 
 export interface WellCoordinate {
-  name: string;
-  x_m: number;
-  y_m: number;
+  name: string
+  x_m: number
+  y_m: number
+}
+
+export interface BoundaryPoint {
+  x_m: number
+  y_m: number
 }
 
 export interface ReservoirGeometry {
-  wells: WellCoordinate[];
-  boundary: { x_m: number; y_m: number }[];
+  wells: WellCoordinate[]
+  boundary: BoundaryPoint[]
 }
 
 export interface MappedWell {
-  name: string;
-  x_m: number;
-  y_m: number;
-  avgPressure: number;
+  name: string
+  x_m: number
+  y_m: number
+  avgPressure: number
 }
