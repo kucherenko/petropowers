@@ -17,7 +17,11 @@ def download_file(reservoir: str, data_type: str, file_path: str) -> FileRespons
     ``PPR1-Well-001/photo_001.png``) to support nested data types such as
     ``core_photos`` and ``osdu_manifests``.
     """
-    base = config.DATA_DIR / reservoir / data_type
+    base = (config.DATA_DIR / reservoir / data_type).resolve()
+    try:
+        base.relative_to(config.DATA_DIR.resolve())
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Path traversal detected")
     if not base.is_dir():
         raise HTTPException(status_code=404, detail="Not found")
     resolved = safe_resolve(base, file_path)

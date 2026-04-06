@@ -224,6 +224,7 @@ def test_download_flat_file(client):
     r = client.get("/reservoirs/ppr-1/well_logs/PPR1-Well-001.las")
     assert r.status_code == 200
     assert r.headers["content-type"].startswith("text/plain")
+    assert b"~VERSION" in r.content  # verify actual file content served
 
 
 def test_download_csv_file(client):
@@ -255,8 +256,14 @@ def test_download_reservoir_not_found(client):
 
 
 def test_download_path_traversal_rejected(client):
-    # Starlette normalises `../../` in the URL before routing, so the traversal
-    # may be absorbed at the HTTP layer (404) before reaching safe_resolve (400).
-    # Either status means the file was not served — both are acceptable.
+    # Literal `../../` is normalized by Starlette before routing, so it arrives
+    # at a different endpoint and returns 404 for unrelated reasons.
     r = client.get("/reservoirs/ppr-1/well_logs/../../etc/passwd")
+    assert r.status_code in (400, 404)
+
+
+def test_download_encoded_traversal_rejected(client):
+    # Percent-encoded `..%2F` bypasses Starlette normalization.
+    # Our bounds check should reject this with 400 or 404.
+    r = client.get("/reservoirs/..%2Fetc/passwd/token.txt")
     assert r.status_code in (400, 404)
