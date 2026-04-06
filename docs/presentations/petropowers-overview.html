@@ -271,6 +271,122 @@
             height: 350px;
             margin: 20px auto;
         }
+
+        .reveal .delegation-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .reveal .domain-box {
+            background: rgba(44, 82, 130, 0.4);
+            border: 2px solid var(--petroleum-light);
+            border-radius: 12px;
+            padding: 15px;
+            width: 200px;
+        }
+
+        .reveal .domain-box h4 {
+            color: var(--light-text);
+            font-size: 0.85em;
+            margin: 0 0 10px 0;
+            text-align: center;
+        }
+
+        .reveal .domain-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.65em;
+        }
+
+        .reveal .domain-box li {
+            margin: 6px 0;
+            color: var(--muted-text);
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .reveal .domain-box li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--petroleum-light);
+        }
+
+        .reveal .dev-box {
+            background: rgba(237, 137, 54, 0.2);
+            border: 2px solid var(--energy-orange);
+            border-radius: 12px;
+            padding: 15px;
+            width: 200px;
+        }
+
+        .reveal .dev-box h4 {
+            color: var(--energy-orange);
+            font-size: 0.85em;
+            margin: 0 0 10px 0;
+            text-align: center;
+        }
+
+        .reveal .dev-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.65em;
+        }
+
+        .reveal .dev-box li {
+            margin: 6px 0;
+            color: var(--muted-text);
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .reveal .dev-box li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--energy-orange);
+        }
+
+        .reveal .delegation-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--energy-orange);
+            font-size: 0.7em;
+            padding-top: 30px;
+        }
+
+        .reveal .delegation-arrow .arrow-text {
+            writing-mode: horizontal-tb;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .reveal .delegation-arrow .arrow-icon {
+            font-size: 2em;
+        }
+
+        .reveal .example-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-top: 20px;
+            font-size: 0.7em;
+            text-align: center;
+        }
+
+        .reveal .example-box code {
+            background: rgba(237, 137, 54, 0.3);
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: var(--energy-orange);
+        }
     </style>
 </head>
 <body>
@@ -355,51 +471,50 @@
 
             <!-- Slide 4: Domain Intelligence -->
             <section>
-                <h2>Domain Intelligence</h2>
-                <p>Oil & Gas Pipeline Coverage</p>
+                <h2>Intelligent Delegation</h2>
+                <p>Domain Skills Delegate to Development Workflows</p>
 
-                <div class="pipeline-flow">
-                    <span class="pipeline-stage">Exploration</span>
-                    <span class="pipeline-arrow">→</span>
-                    <span class="pipeline-stage">Drilling</span>
-                    <span class="pipeline-arrow">→</span>
-                    <span class="pipeline-stage">Reservoir & Production</span>
-                    <span class="pipeline-arrow">→</span>
-                    <span class="pipeline-stage">Midstream</span>
-                    <span class="pipeline-arrow">→</span>
-                    <span class="pipeline-stage">Refining</span>
+                <div class="delegation-container">
+                    <div class="domain-box">
+                        <h4>Domain Skills</h4>
+                        <ul>
+                            <li>Exploration & Seismic</li>
+                            <li>Drilling Operations</li>
+                            <li>Reservoir & Production</li>
+                            <li>Midstream & Pipelines</li>
+                            <li>Refining & Processing</li>
+                        </ul>
+                        <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--steel-gray); font-size: 0.6em; color: var(--muted-text);">
+                            Understands terminology, data formats, safety requirements
+                        </div>
+                    </div>
+
+                    <div class="delegation-arrow">
+                        <span class="arrow-text">DELEGATES</span>
+                        <span class="arrow-icon">⟶</span>
+                        <span class="arrow-text" style="margin-top: 8px;">RETURNS</span>
+                        <span class="arrow-icon">⟵</span>
+                    </div>
+
+                    <div class="dev-box">
+                        <h4>Development Workflow</h4>
+                        <ul>
+                            <li>Brainstorming</li>
+                            <li>Writing Plans</li>
+                            <li>Test-Driven Development</li>
+                            <li>Subagent Execution</li>
+                            <li>Code Review</li>
+                        </ul>
+                        <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--energy-orange); font-size: 0.6em; color: var(--muted-text);">
+                            Rigorous software engineering practices
+                        </div>
+                    </div>
                 </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Pipeline</th>
-                            <th>AI Capabilities</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Exploration</strong></td>
-                            <td>Seismic interpretation, well log analysis, prospect evaluation</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Drilling</strong></td>
-                            <td>Real-time monitoring, kick detection, stuck pipe analysis</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Reservoir</strong></td>
-                            <td>Decline analysis, production forecasting, reservoir modeling</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Midstream</strong></td>
-                            <td>Pipeline integrity, leak detection, flow assurance</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Refining</strong></td>
-                            <td>Process optimization, crude blending, product quality</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="example-box">
+                    <strong>Example:</strong> "Build a decline curve analyzer" → Domain skill understands <code>decline curves</code>, 
+                    delegates to <code>brainstorming</code> → <code>TDD</code> → <code>review</code>, returns working software with domain context preserved
+                </div>
             </section>
 
             <!-- Slide 5: Development Workflow -->
