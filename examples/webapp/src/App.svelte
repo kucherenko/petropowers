@@ -2,7 +2,7 @@
   import { Router, Route } from 'svelte-routing'
   import { get } from 'svelte/store'
   import { navigate } from 'svelte-routing'
-  import { apiKey } from './lib/stores'
+  import { apiKey, theme } from './lib/stores'
   import Login from './pages/Login.svelte'
   import ReservoirList from './pages/ReservoirList.svelte'
   import ReservoirOverview from './pages/ReservoirOverview.svelte'
@@ -16,6 +16,15 @@
   $effect(() => {
     if (!get(apiKey) && window.location.pathname !== '/login') {
       navigate('/login', { replace: true })
+    }
+  })
+
+  // Apply theme class to <html> element
+  $effect(() => {
+    if ($theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
     }
   })
 </script>
