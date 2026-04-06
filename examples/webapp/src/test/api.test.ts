@@ -92,3 +92,33 @@ describe('loadWellPressures', () => {
     expect(result).toEqual([])
   })
 })
+
+describe('loadReservoirGeometry', () => {
+  beforeEach(() => {
+    global.fetch = vi.fn()
+  })
+
+  it('returns parsed geometry for a valid reservoir', async () => {
+    const body = {
+      wells: [{ name: 'PPR1-Well-001', x_m: 1234.5, y_m: 5678.9 }],
+      boundary: [{ x_m: 0, y_m: 0 }, { x_m: 10000, y_m: 8000 }],
+    }
+    ;(global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce(
+      new Response(JSON.stringify(body), { status: 200 })
+    )
+    const { loadReservoirGeometry } = await import('../lib/api')
+    const result = await loadReservoirGeometry('ppr-1')
+    expect(result.wells).toHaveLength(1)
+    expect(result.wells[0].name).toBe('PPR1-Well-001')
+    expect(result.wells[0].x_m).toBe(1234.5)
+    expect(result.boundary).toHaveLength(2)
+  })
+
+  it('throws on 404', async () => {
+    ;(global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce(
+      new Response('Not Found', { status: 404 })
+    )
+    const { loadReservoirGeometry } = await import('../lib/api')
+    await expect(loadReservoirGeometry('no-such-reservoir')).rejects.toThrow('404')
+  })
+})

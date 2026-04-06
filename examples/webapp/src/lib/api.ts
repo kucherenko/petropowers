@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 import { apiKey } from './stores'
-import type { HealthResponse, ReservoirSummary } from './types'
+import type { HealthResponse, ReservoirSummary, ReservoirGeometry } from './types'
 import Papa from 'papaparse'
 
 function getHeaders(): HeadersInit {
@@ -78,4 +78,9 @@ export async function loadWellPressures(name: string): Promise<WellPressure[]> {
     })
   )
   return results.filter((r): r is WellPressure => r !== null)
+}
+
+export async function loadReservoirGeometry(reservoirId: string): Promise<ReservoirGeometry> {
+  const r = await apiFetch(`/reservoirs/${encodeURIComponent(reservoirId)}/geometry`)
+  return r.json()
 }
