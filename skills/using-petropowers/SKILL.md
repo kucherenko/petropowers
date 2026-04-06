@@ -115,6 +115,10 @@ These thoughts mean STOP—you're rationalizing:
 | "I'll just do this one thing first" | Check BEFORE doing anything. |
 | "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
 | "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+| "I can just generate this quickly" | Creative work requires brainstorming. Check gatekeeper. |
+| "The request is clear enough" | Missing details = ambiguity. Check gatekeeper. |
+| "This is simple data generation" | Data generation is creative work. Brainstorm first. |
+| "I'll just explore first then decide" | Gatekeeper check comes BEFORE exploration. |
 
 ## Skill Priority
 
