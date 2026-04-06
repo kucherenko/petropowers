@@ -108,6 +108,7 @@ describe('loadReservoirGeometry', () => {
     )
     const { loadReservoirGeometry } = await import('../lib/api')
     const result = await loadReservoirGeometry('ppr-1')
+    expect(global.fetch).toHaveBeenCalledWith('/api/reservoirs/ppr-1/geometry', expect.any(Object))
     expect(result.wells).toHaveLength(1)
     expect(result.wells[0].name).toBe('PPR1-Well-001')
     expect(result.wells[0].x_m).toBe(1234.5)
