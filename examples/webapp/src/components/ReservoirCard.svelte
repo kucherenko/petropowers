@@ -37,7 +37,7 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <button
-  class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden w-full text-left cursor-pointer hover:shadow-md transition-shadow"
+  class="rounded-2xl border bg-card text-card-foreground shadow-sm overflow-hidden w-full text-left cursor-pointer hover:shadow-md transition-shadow"
   {onclick}
 >
   <div class="w-full" bind:clientWidth={cardWidth}>
