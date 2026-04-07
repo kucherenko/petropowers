@@ -1,0 +1,9 @@
+services:
+  presentations:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    container_name: petropowers-presentations
+    restart: unless-stopped
