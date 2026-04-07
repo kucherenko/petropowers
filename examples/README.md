@@ -1,9 +1,10 @@
 # Synthetic Oil & Gas Examples
 
-This directory contains two things:
+This directory contains three components:
 
 1. **`generate_reservoir_dataset.py`** — a script that uses the petropowers `synthetic_data` framework to generate a complete synthetic oil field dataset
 2. **`api/`** — a read-only FastAPI service for browsing and downloading the generated data
+3. **`webapp/`** — a Svelte frontend for visualizing reservoir data (well logs, production, maps, core photos)
 
 ---
 
@@ -234,3 +235,62 @@ python examples/generate_reservoir_dataset.py
 # or with a fixed seed
 python examples/generate_reservoir_dataset.py --seed 42
 ```
+
+---
+
+## Web Application
+
+A Svelte-based web application for visualizing synthetic reservoir data. Provides an interactive interface for exploring well logs, production charts, reservoir maps, core photos, and OSDU manifests.
+
+### Features
+
+- **Reservoir List** — Browse available reservoirs
+- **Reservoir Map** — Interactive well map with contour visualization
+- **Well Logs** — Display LAS well log curves with depth tracking
+- **Production Charts** — Time-series production data (oil, gas, water rates)
+- **Core Photos** — View core sample photos by well
+- **OSDU Manifests** — Browse OSDU metadata records
+
+### Install dependencies
+
+```bash
+cd examples/webapp
+npm install
+```
+
+### Development server
+
+```bash
+npm run dev
+```
+
+The app runs on `http://localhost:5173` by default. The dev server proxies API requests to `http://localhost:8000`.
+
+### Production build
+
+```bash
+npm run build
+npm run preview
+```
+
+### Run tests
+
+```bash
+npm run test          # Run once
+npm run test:watch    # Watch mode
+```
+
+### Environment variables
+
+The webapp proxies API requests through the Express server configured in `server.cjs`. To connect to a different API backend, modify the proxy target in that file.
+
+### Technology stack
+
+| Component | Technology |
+|-----------|------------|
+| Framework | Svelte 5 |
+| Build | Vite |
+| Styling | Tailwind CSS |
+| Charts | uPlot |
+| Icons | Lucide Svelte |
+| Testing | Vitest + Testing Library |
