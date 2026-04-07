@@ -106,3 +106,36 @@ describe('pressureToRadius', () => {
     expect(pressureToRadius(0, 100, 400)).toBe(6)
   })
 })
+
+describe('smoothClosedPath', () => {
+  it('returns empty string for fewer than 3 points', async () => {
+    const { smoothClosedPath } = await import('../lib/wellmap')
+    expect(smoothClosedPath([])).toBe('')
+    expect(smoothClosedPath([{ x: 0, y: 0 }])).toBe('')
+    expect(smoothClosedPath([{ x: 0, y: 0 }, { x: 1, y: 0 }])).toBe('')
+  })
+
+  it('returns a path string starting with M and ending with Z for 3+ points', async () => {
+    const { smoothClosedPath } = await import('../lib/wellmap')
+    const pts = [{ x: 0, y: 0 }, { x: 100, y: 0 }, { x: 50, y: 100 }]
+    const result = smoothClosedPath(pts)
+    expect(result).toMatch(/^M /)
+    expect(result).toMatch(/ Z$/)
+  })
+
+  it('contains cubic bezier C commands for each segment', async () => {
+    const { smoothClosedPath } = await import('../lib/wellmap')
+    const pts = [{ x: 0, y: 0 }, { x: 100, y: 0 }, { x: 50, y: 100 }]
+    const result = smoothClosedPath(pts)
+    // 3 points → 3 C segments
+    const cCount = (result.match(/ C /g) ?? []).length
+    expect(cCount).toBe(3)
+  })
+
+  it('starts at the first point', async () => {
+    const { smoothClosedPath } = await import('../lib/wellmap')
+    const pts = [{ x: 42, y: 17 }, { x: 100, y: 0 }, { x: 50, y: 100 }]
+    const result = smoothClosedPath(pts)
+    expect(result).toMatch(/^M 42 17/)
+  })
+})

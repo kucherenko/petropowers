@@ -1,6 +1,6 @@
 <script lang="ts">
   import { navigate } from 'svelte-routing'
-  import { mergeGeometryAndPressure, interpolatePressure, pressureQuartileColor, pressureToRadius } from '../lib/wellmap'
+  import { mergeGeometryAndPressure, interpolatePressure, pressureQuartileColor, pressureToRadius, smoothClosedPath } from '../lib/wellmap'
   import type { ReservoirGeometry } from '../lib/types'
   import type { WellPressure } from '../lib/api'
 
@@ -106,31 +106,6 @@
   function handleClick(dot: DotProps) {
     const wellFile = `${dot.wellName}_production.csv`
     navigate(`/reservoirs/${reservoirName}/production?well=${encodeURIComponent(wellFile)}`)
-  }
-
-  /**
-   * Convert an array of SVG-space {x, y} points into a smooth closed SVG path
-   * using Catmull-Rom to cubic bezier conversion.
-   * tension=0.3 produces gentle curves that preserve the overall polygon shape.
-   * Returns '' when fewer than 3 points are provided.
-   */
-  function smoothClosedPath(
-    pts: { x: number; y: number }[],
-    tension = 0.3
-  ): string {
-    if (pts.length < 3) return ''
-    const n = pts.length
-    const p = (i: number) => pts[(i + n) % n]
-    let d = `M ${pts[0].x} ${pts[0].y}`
-    for (let i = 0; i < n; i++) {
-      const p0 = p(i - 1), p1 = p(i), p2 = p(i + 1), p3 = p(i + 2)
-      const cp1x = p1.x + tension * (p2.x - p0.x)
-      const cp1y = p1.y + tension * (p2.y - p0.y)
-      const cp2x = p2.x - tension * (p3.x - p1.x)
-      const cp2y = p2.y - tension * (p3.y - p1.y)
-      d += ` C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${p2.x} ${p2.y}`
-    }
-    return d + ' Z'
   }
 </script>
 
